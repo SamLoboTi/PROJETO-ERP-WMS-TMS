@@ -1,323 +1,123 @@
-# 📊 Arquitetura do Dashboard LOGIMAX
+# Arquitetura LogiMAX
 
-## 🏗️ Estrutura Completa
+Este documento descreve a arquitetura desejada para a retomada do projeto LogiMAX.
+A ideia e usar uma arquitetura parecida com Clean Architecture, mas com poucas pastas,
+facil de entender e adequada para um projeto de dados, API analitica e dashboard.
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                      🌐 NAVEGADOR DO USUÁRIO                    │
-│                   (Desktop/Tablet/Celular)                      │
-└────────────────────────┬────────────────────────────────────────┘
-                         │
-                         │ HTTP/HTTPS
-                         │ localhost:5000 ou https://seu-app.com
-                         ▼
-        ┌────────────────────────────────────────────────┐
-        │         🚀 SERVIDOR FLASK (app.py)            │
-        │                                                 │
-        │  ┌──────────────────────────────────────────┐ │
-        │  │         API REST (10 Endpoints)         │ │
-        │  │                                          │ │
-        │  │  /              → Serve index.html       │ │
-        │  │  /api/kpis       → KPIs principais      │ │
-        │  │  /api/charts/*   → Dados dos gráficos   │ │
-        │  │  /api/tables/*   → Dados das tabelas    │ │
-        │  └──────────────────────────────────────────┘ │
-        │                                                 │
-        │  ┌──────────────────────────────────────────┐ │
-        │  │    Processamento (Pandas + NumPy)        │ │
-        │  │                                          │ │
-        │  │  • Carregamento CSV                      │ │
-        │  │  • Cálculos de KPIs                      │ │
-        │  │  • Agregações de dados                   │ │
-        │  │  • Transformações                        │ │
-        │  └──────────────────────────────────────────┘ │
-        └────────┬─────────────────────────┬────────────┘
-                 │                         │
-        ┌────────▼─────────┐      ┌────────▼──────────┐
-        │  📁 Dados CSV    │      │  🎨 Frontend      │
-        │                  │      │                   │
-        │ • ERP_Pedidos    │      │ • index.html      │
-        │ • WMS_Estoque    │      │ • CSS (inline)    │
-        │ • TMS_Transporte │      │ • JavaScript      │
-        │                  │      │ • Chart.js        │
-        └──────────────────┘      └───────────────────┘
-```
+## Objetivo da arquitetura
 
----
+Separar o projeto em camadas simples:
 
-## 🔄 Fluxo de Dados
+- Entrada: rotas Flask e tela do dashboard.
+- Aplicacao: casos de uso analiticos, como calcular KPIs e montar tabelas.
+- Dominio: regras de negocio logistico, metricas e validacoes.
+- Infraestrutura: leitura de CSV, conexao futura com banco ou API externa.
 
-```
-┌─────────────────────┐
-│  Usuário Acessa     │
-│  Dashboard Web      │
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│  index.html Carrega │
-│  CSS + JavaScript   │
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────────────────────────┐
-│ JavaScript Dispara Requisições para API │
-│                                         │
-│ fetch('/api/kpis')                      │
-│ fetch('/api/status-pedidos')            │
-│ fetch('/api/pedidos-por-dia')           │
-│ fetch('/api/custos-modal')              │
-│ fetch('/api/top-produtos')              │
-│ fetch('/api/estoque-distribuicao')      │
-│ fetch('/api/pedidos-tabela')            │
-│ fetch('/api/estoque-tabela')            │
-│ fetch('/api/transporte-tabela')         │
-└──────────┬──────────────────────────────┘
-           │
-           ▼
-┌─────────────────────────────────────────┐
-│ Flask App.py Processa Requisições       │
-│                                         │
-│ 1. Carrega CSV em Pandas                │
-│ 2. Calcula KPIs                         │
-│ 3. Agrega dados                         │
-│ 4. Retorna JSON                         │
-└──────────┬──────────────────────────────┘
-           │
-           ▼
-┌─────────────────────────────────────────┐
-│ JSON Retorna para Frontend              │
-│                                         │
-│ {                                       │
-│   "lead_time": 5.2,                     │
-│   "fill_rate": 92.5,                    │
-│   "labels": ["A", "B", "C"],            │
-│   "data": [10, 20, 30]                  │
-│ }                                       │
-└──────────┬──────────────────────────────┘
-           │
-           ▼
-┌──────────────────────────────────────────┐
-│ Chart.js Renderiza Gráficos              │
-│ Tabelas Populadas com Dados              │
-│ KPIs Atualizados nos Cartões             │
-└──────────┬───────────────────────────────┘
-           │
-           ▼
-┌──────────────────────────────────────────┐
-│ ✅ Dashboard Exibido para o Usuário      │
-│                                          │
-│ • 6 Cartões com KPIs                     │
-│ • 6 Gráficos Interativos                 │
-│ • 3 Abas com Tabelas                     │
-│ • Hora da última atualização             │
-└──────────────────────────────────────────┘
-           │
-           │ A cada 60 segundos
-           │ (auto-refresh)
-           │
-           └──────────────────► Voltar ao início
+Hoje grande parte disso esta concentrada em `app.py`. Funciona, mas dificulta teste,
+manutencao e evolucao.
+
+## Estrutura alvo simples
+
+```text
+LOGIMAX.PROJETO-/
+|-- app.py
+|-- requirements.txt
+|-- README.md
+|-- PROJECT.md
+|-- CONTEXT.md
+|-- BACKLOG.md
+|-- ARQUITETURA.md
+|-- .github/
+|   `-- workflows/
+|       `-- ci.yml
+|-- logimax/
+|   |-- __init__.py
+|   |-- web.py
+|   |-- data_sources.py
+|   |-- analytics.py
+|   |-- validators.py
+|   `-- serializers.py
+|-- templates/
+|   `-- index.html
+|-- tests/
+|   |-- test_data_quality.py
+|   `-- test_api_contracts.py
+|-- ERP_Pedidos.csv
+|-- WMS_Estoque.csv
+`-- TMS_Transporte.csv
 ```
 
----
+## Responsabilidade de cada parte
 
-## 📦 Componentes do Backend (app.py)
+`app.py`
+Ponto de entrada. Deve apenas criar a aplicacao Flask e chamar a camada web.
 
-```
-┌─ app.py ──────────────────────────────────────────────────┐
-│                                                            │
-│  ┌─ Imports ─────────────────────────────────────────────┐ │
-│  │ • Flask (servidor web)                               │ │
-│  │ • Flask-CORS (acesso frontend)                       │ │
-│  │ • Pandas (processamento dados)                       │ │
-│  │ • NumPy (cálculos numéricos)                         │ │
-│  └────────────────────────────────────────────────────────┘ │
-│                                                            │
-│  ┌─ Funções ─────────────────────────────────────────────┐ │
-│  │ • carregar_dados() → Lê CSVs                         │ │
-│  │ • calcular_kpis() → Calcula métricas                 │ │
-│  └────────────────────────────────────────────────────────┘ │
-│                                                            │
-│  ┌─ Endpoints (Rotas) ───────────────────────────────────┐ │
-│  │ GET /              → Página principal (HTML)         │ │
-│  │ GET /api/kpis      → KPIs em JSON                    │ │
-│  │ GET /api/status-pedidos → Status de pedidos          │ │
-│  │ GET /api/conformidade-prazos → Prazos               │ │
-│  │ GET /api/pedidos-por-dia → Série temporal           │ │
-│  │ GET /api/custo-por-modal → Custos por modal         │ │
-│  │ GET /api/top-produtos → Top 10                       │ │
-│  │ GET /api/distribuicao-estoque → Histograma         │ │
-│  │ GET /api/pedidos-tabela → Tabela ERP                │ │
-│  │ GET /api/estoque-tabela → Tabela WMS                │ │
-│  │ GET /api/transporte-tabela → Tabela TMS             │ │
-│  │ GET /api/health → Status da API                      │ │
-│  └────────────────────────────────────────────────────────┘ │
-│                                                            │
-│  ┌─ Configuração ────────────────────────────────────────┐ │
-│  │ • app.run(host='0.0.0.0', port=5000)               │ │
-│  │ • CORS habilitado para qualquer origem             │ │
-│  │ • Debug=False em produção                           │ │
-│  └────────────────────────────────────────────────────────┘ │
-│                                                            │
-└────────────────────────────────────────────────────────────┘
+`logimax/web.py`
+Define rotas Flask. Nao deve conter regra de negocio pesada.
+
+`logimax/data_sources.py`
+Leitura dos dados. Hoje os dados vem de CSV, mas no futuro pode vir de banco,
+Databricks, API, PostgreSQL ou SQLite sem mexer nas regras de negocio.
+
+`logimax/analytics.py`
+Calculo dos KPIs: lead time, fill rate, receita, entregas no prazo, rotatividade,
+acuracidade e inconsistencias.
+
+`logimax/validators.py`
+Validacoes de qualidade: colunas obrigatorias, datas invalidas, fill rate acima
+de 100%, cancelamentos altos, estoque divergente e dados nulos.
+
+`logimax/serializers.py`
+Conversao segura para JSON, tratando NaN, infinito, datas e tipos do Pandas.
+
+`templates/index.html`
+Interface visual. Deve consumir a API e renderizar cards, graficos e tabelas.
+
+`tests/`
+Testes automatizados para garantir que os dados, APIs e contratos JSON continuam
+funcionando.
+
+## Fluxo atual
+
+```text
+CSV -> app.py -> Pandas -> JSON -> index.html -> Chart.js/tabelas
 ```
 
----
+## Fluxo alvo
 
-## 🎨 Componentes do Frontend (index.html)
-
-```
-┌─ index.html ──────────────────────────────────────────────┐
-│                                                            │
-│  ┌─ HTML ────────────────────────────────────────────────┐ │
-│  │ • DOCTYPE HTML5                                      │ │
-│  │ • Meta tags (responsivo, UTF-8)                     │ │
-│  │ • Head com links CSS externos                       │ │
-│  │ • Body com estrutura semântica                      │ │
-│  └────────────────────────────────────────────────────────┘ │
-│                                                            │
-│  ┌─ CSS (Inline) ────────────────────────────────────────┐ │
-│  │ • CSS Grid e Flexbox                                │ │
-│  │ • Variables (cores, sombras)                        │ │
-│  │ • Animações (spin, slideIn, fadeIn)                 │ │
-│  │ • Media queries (responsivo)                        │ │
-│  │ • Cores profissionais                               │ │
-│  │ • Dark mode compatible                              │ │
-│  └────────────────────────────────────────────────────────┘ │
-│                                                            │
-│  ┌─ JavaScript ──────────────────────────────────────────┐ │
-│  │ • Funções CRUD para gráficos                        │ │
-│  │ • Fetch API para chamar endpoints                   │ │
-│  │ • Chart.js para renderizar                          │ │
-│  │ • Tratamento de erros                               │ │
-│  │ • Auto-refresh com setInterval                      │ │
-│  │ • Manipulação do DOM                                │ │
-│  │ • Event listeners para interação                    │ │
-│  └────────────────────────────────────────────────────────┘ │
-│                                                            │
-│  ┌─ Componentes Visuais ─────────────────────────────────┐ │
-│  │ • Header com título e refresh                       │ │
-│  │ • 6 Cartões KPI (grid responsivo)                   │ │
-│  │ • 6 Gráficos (grid responsivo)                      │ │
-│  │ • 3 Tabs com tabelas                                │ │
-│  │ • Footer com informações                            │ │
-│  │ • Loading spinner                                   │ │
-│  │ • Error messages                                    │ │
-│  └────────────────────────────────────────────────────────┘ │
-│                                                            │
-│  ┌─ Dependências Externas ───────────────────────────────┐ │
-│  │ • Chart.js (CDN) - Gráficos                         │ │
-│  │ • Font Awesome (CDN) - Ícones                       │ │
-│  │ • Animate.css (CDN) - Animações                     │ │
-│  └────────────────────────────────────────────────────────┘ │
-│                                                            │
-└────────────────────────────────────────────────────────────┘
+```text
+CSV/API/Banco
+  -> data_sources.py
+  -> validators.py
+  -> analytics.py
+  -> serializers.py
+  -> web.py
+  -> index.html
 ```
 
----
+## Principios para evoluir o projeto
 
-## 🔐 Segurança & Performance
+- Cada metrica deve ter formula documentada.
+- Nenhum KPI simulado deve aparecer como real.
+- Toda rota de API deve ter contrato JSON previsivel.
+- Todo erro de dados deve ser visivel, nao escondido por fallback silencioso.
+- Dashboard deve funcionar localmente mesmo se a internet estiver instavel.
+- CI deve rodar a cada push e pull request.
+- Toda iteracao deve terminar com resumo do que mudou e validacoes executadas.
 
-```
-Segurança:
-├─ CORS habilitado (acesso frontend)
-├─ Sem exposição de credenciais
-├─ API validada
-├─ Headers de segurança
-└─ Sem dados sensíveis no frontend
+## Riscos tecnicos atuais
 
-Performance:
-├─ Carregamento: <2s
-├─ API Responses: <200ms
-├─ Gráficos: Renderizam <500ms
-├─ Memory: ~50MB (local)
-├─ CPU: Baixo quando idle
-└─ Escalável até 100+ usuários simultâneos
-```
+- `app.py` mistura leitura de dados, calculo de metricas e rotas.
+- O frontend depende de CDN externo para Chart.js.
+- Alguns documentos tem numeros diferentes dos resultados reais da API.
+- Alguns testes quebravam no Windows por encoding.
+- `CORS(app)` esta aberto para qualquer origem.
+- Existem fallbacks com dados padrao que podem esconder falha real.
 
----
+## Decisoes arquiteturais iniciais
 
-## 🚀 Deploy Arquitetura
-
-```
-Desenvolvimento Local:
-    Python + Flask → localhost:5000
-
-Production (Render):
-    Git (GitHub) → Render Deploy → https://seu-app.onrender.com
-                       ↓
-                    Buildpack Python
-                       ↓
-                    pip install -r requirements.txt
-                       ↓
-                    gunicorn app:app (production server)
-                       ↓
-                    ✅ Live 24/7
-
-Production (Railway):
-    Git (GitHub) → Railway Deploy → https://seu-app.up.railway.app
-                       ↓
-                    Auto-detect Python
-                       ↓
-                    Deploy automático
-                       ↓
-                    ✅ Live 24/7
-```
-
----
-
-## 📊 Fluxo de Dados (Detalhado)
-
-```
-CSV Files                  Python Processing               JSON Response
-━━━━━━━━━━━━              ━━━━━━━━━━━━━━━━━━━              ━━━━━━━━━━━
-                         ┌─────────────────────┐
-ERP_Pedidos.csv ────────→│ carregar_dados()    │────┐
-                         │                     │    │
-WMS_Estoque.csv ────────→│ • pd.read_csv()     │    │
-                         │ • tipo conversão    │    │
-TMS_Transporte.csv ──────│ • tratamento NaN    │    │
-                         └─────────────────────┘    │
-                                                    ▼
-                         ┌─────────────────────┐
-                         │ calcular_kpis()     │────────→ { "lead_time": 5.2,
-                         │                     │          "fill_rate": 92.5,
-                         │ • Merge dataframes  │          "custo_total": 50000,
-                         │ • Agregações       │          "rotatividade": 3.2,
-                         │ • Cálculos KPI     │          "acuracia": 98.5,
-                         │ • Estatísticas     │          "taxa_conformidade": 96.1 }
-                         │ • Formatações      │
-                         └─────────────────────┘
-
-Frontend Receives JSON:
-    ↓
-JavaScript processa dados
-    ↓
-Chart.js renderiza gráficos
-    ↓
-Tabelas HTML populadas
-    ↓
-✅ Dashboard visível
-```
-
----
-
-## 🎯 Status & Pronto para Produção
-
-```
-✅ Backend Flask      - 100% funcional
-✅ Frontend HTML/CSS  - 100% responsivo
-✅ JavaScript APIs    - Todas testadas
-✅ Gráficos Chart.js  - Renderizando
-✅ Tabelas HTML       - Dinâmicas
-✅ Deploy Ready       - Procfile pronto
-✅ Documentação       - Completa
-✅ Testes Locais      - OK
-✅ Validação          - Script incluído
-
-Status: 🟢 PRODUCTION READY
-```
-
----
-
-**Arquitetura Completa | Dashboard LOGIMAX v2.0 | 10/02/2026**
+- Manter Flask por enquanto, porque e simples e suficiente para uma API analitica.
+- Manter CSV como fonte inicial, mas isolar a leitura para migrar depois.
+- Nao migrar tudo para banco agora; primeiro estabilizar testes e metricas.
+- Criar CI simples antes de grandes refatoracoes.
+- Refatorar em etapas pequenas para nao quebrar o dashboard.

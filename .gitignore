@@ -27,3 +27,11 @@ wheels/
 *.log
 *.sqlite
 *.db
+*.log
+*.mp4
+server.out.log
+server.err.log
+cloudflared-*.out
+cloudflared-*.err
+cloudflared-*.log
+logimax-dashboard-*.png

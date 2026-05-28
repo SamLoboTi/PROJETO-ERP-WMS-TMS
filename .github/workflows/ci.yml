@@ -1,0 +1,44 @@
+name: LogiMAX CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate backend and dashboard contracts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Compile Python files
+        run: python -m compileall app.py logimax test_dashboard_data.py test_endpoints.py test_html_validation.py
+
+      - name: Validate source CSV data
+        run: python test_dashboard_data.py
+
+      - name: Validate dashboard HTML
+        run: python test_html_validation.py
+
+      - name: Start Flask app
+        run: |
+          python app.py &
+          sleep 5
+
+      - name: Validate API endpoints
+        run: python test_endpoints.py

@@ -1,272 +1,178 @@
-# 📊 Dashboard LOGIMAX - Sistema Web Logístico
+# LogiMAX - Dashboard Analitico de Logistica
 
-> Dashboard interativo e responsivo para análise em tempo real de indicadores logísticos com acesso permanente via internet.
+[![LogiMAX - Dashboard Analitico de Logistica](assets/logimax-marketing-banner.png)](#como-rodar-localmente)
 
----
+LogiMAX e um produto analitico de logistica que integra dados de ERP, WMS e
+TMS para gerar KPIs executivos, APIs JSON e um dashboard visual para tomada de
+decisao.
 
-## 🚀 1. Visão Geral do Projeto
+O projeto foi repaginado como um estudo de amadurecimento tecnico: ele nasceu
+como um dashboard funcional, mas ainda nao estava 100% correto em regras de
+negocio, formulas, confiabilidade dos dados e organizacao do codigo. A nova
+versao mostra como um projeto melhora quando e revisado com criterio senior:
+menos improviso, mais rastreabilidade, metricas explicadas e arquitetura mais
+simples de manter.
 
-- Controle e gestão do inventário  
-- Monitoramento de KPIs logísticos  
-- Análise de desempenho e gargalos  
-- Criação de dashboard interativo  
-- Relatório de inconsistências dos dados  
+## Problema resolvido
 
----
+A operacao tinha dados espalhados em fontes diferentes:
 
-## 📂 2. Estrutura do Projeto
+| Fonte | Dados principais | Risco antes da consolidacao |
+|---|---|---|
+| ERP | pedidos, clientes, produtos, status e valores | receita podia considerar pedidos cancelados |
+| WMS | estoque, separacao, inventario e movimentacao | divergencias de inventario ficavam escondidas |
+| TMS | entrega, prazo, custo, distancia e modal | atrasos e custos por modal eram dificeis de comparar |
 
-```
-📁 projeto-logistico/
-│── 📄 README.md
-│── 📊 dashboard.pbix
-│── 📈 graficos/
-│     ├── leadtime.png
-│     ├── fillrate.png
-│     ├── custos.png
-│     ├── rotatividade.png
-│── 📁 dados/
-│     ├── pedidos_raw.csv
-│     ├── pedidos_tratado.csv
-│── 🧹 scripts/
-      ├── etl.py
-      ├── limpeza.ipynb
-```
+O LogiMAX consolida essas fontes para responder perguntas de negocio:
 
----
+- Qual e o lead time medio?
+- Qual percentual da demanda foi atendido?
+- Quanto foi gerado em receita ativa?
+- Quais entregas cumpriram prazo?
+- Existe divergencia entre estoque do sistema e inventario real?
+- Qual modal concentra maior custo logistico?
 
-## 📥 3. Extração dos Dados (ETL)
+## Resultado atual
 
-Os dados foram extraídos da base **X** via Python:
+Os resultados abaixo sao calculados pelos CSVs atuais do projeto.
 
-```python
-import pandas as pd
-df = pd.read_csv("pedidos_raw.csv")
-df.head()
-```
+| Indicador | Resultado | Explicacao |
+|---|---:|---|
+| Lead Time Medio | 9.45 dias | Media entre data do pedido e data de entrega. |
+| Fill Rate | 79.55% | Demanda ativa atendida por produto, limitada ao que foi pedido. |
+| Receita Total Ativa | R$ 10.747.503,47 | Receita de pedidos aprovados e emitidos. |
+| Entregas no Prazo | 60.84% | Pedidos ativos com prazo real menor ou igual ao estimado. |
+| Rotatividade | 0.95x | Saidas sobre estoque medio total. |
+| Acuracidade | 98.64% | Diferenca entre estoque final e inventario real. |
+| Inconsistencias | 174 alertas | Produtos com divergencia de inventario. |
 
----
+## O que foi corrigido na revisao
 
-## 🧹 4. Limpeza e Transformação
+Antes da revisao, o projeto funcionava visualmente, mas existiam pontos que
+poderiam gerar interpretacao errada para a empresa.
 
-Principais tratamentos aplicados:
+| Antes | Depois |
+|---|---|
+| Fill rate podia passar de 100% por erro de granularidade. | Fill rate agora cruza demanda ativa do ERP com separacao do WMS por produto e limita o atendido ao solicitado. |
+| Receita considerava pedidos que nao deveriam entrar na receita ativa. | Receita agora considera apenas pedidos aprovados e emitidos. |
+| Rotatividade estava fora de escala para leitura executiva. | Formula foi reorganizada usando saidas sobre estoque medio total. |
+| Variacoes simuladas pareciam indicadores reais. | Variacoes fixas foram removidas ou deixadas como `0.0` quando nao ha serie temporal confiavel. |
+| Chart.js dependia totalmente de CDN externo. | Chart.js foi salvo localmente em `static/vendor/chart.umd.js`. |
+| Codigo concentrava muitas responsabilidades no `app.py`. | Regras foram separadas em camadas simples dentro de `logimax/`. |
 
-| Etapa | Descrição |
-|------|-----------|
-| Remoção de duplicados | Exclusão de registros repetidos |
-| Padronização de datas | Conversão para formato YYYY-MM-DD |
-| Correção de nulos | Preenchimento ou remoção conforme regra |
-| Criação de métricas | Lead Time, Fill Rate, Rotatividade |
+Esse processo reforca um ponto importante: repaginar conhecimento nao e apenas
+"deixar bonito". E revisar decisao, formula, arquitetura, risco e comunicacao.
+Um projeto de dados pode estar visualmente pronto e ainda assim entregar um KPI
+errado. A maturidade aparece quando o codigo passa a explicar, validar e
+sustentar os resultados que mostra.
 
----
+## Stack
 
-## 📊 5. Indicadores Gerais
+- Python
+- Flask
+- Pandas
+- NumPy
+- HTML/CSS/JavaScript
+- Chart.js
+- GitHub Actions
 
-| Métrica | Valor |
-|--------|-------|
-| Total de Pedidos | **1000** |
-| Entregas no Prazo (%) | **60%** |
-| Tempo Médio de Atrasos (dias) | **0,05** |
-| Lead Time Médio (dias) | **12,01** |
-| Fill Rate (%) | **1,51%** |
-| Receita Total (R$) | **57.000** |
-| Soma da Distância (km) | **66.000 km** |
+## Arquitetura
 
----
+A arquitetura atual segue uma versao simples, inspirada em Clean Architecture,
+mas sem excesso de pastas.
 
-## 📈 6. Gráficos do Projeto
-
-Substitua as imagens abaixo depois:
-
-### ⏱ Lead Time Médio
-![Lead Time](./graficos/leadtime.png)
-
-### 📦 Fill Rate – Eficiência de Atendimento
-![Fill Rate](./graficos/fillrate.png)
-
-### 💰 Custo Logístico
-![Custos](./graficos/custos.png)
-
-### 🔄 Rotatividade de Estoque
-![Rotatividade](./graficos/rotatividade.png)
-
----
-
-## 🔍 7. Relatório de Inconsistências
-
-| Campo | Problema Encontrado | Motivo / Impacto |
-|-------|----------------------|------------------|
-| DataEntrega | Datas futuras | Erro de digitação ou sistema |
-| Quantidade | Valores negativos | Cadastro incorreto |
-| Distância | Registros zerados | Falha no roteirizador |
-| Status | Inexistente | Impede cálculo de Lead Time |
-
----
-
-## 🧠 8. Conclusões da Análise
-
-- O **Lead Time médio (12 dias)** indica oportunidade de melhoria no fluxo logístico.  
-- O **Fill Rate** está abaixo do ideal (< 95%).  
-- Há inconsistências de cadastro que afetam a rotatividade.  
-- A limpeza de dados aumentou a confiabilidade dos indicadores em 26%.  
-
----
-
-## 🛠 9. Tecnologias Utilizadas
-
-- **Python (pandas, matplotlib)**  
-- **Power BI**  
-- **Excel**  
-- **GitHub**  
-- **SQL**  
-
----
-
-## 📎 10. Como Executar o Projeto
-
-```bash
-git clone https://github.com/seuusuario/projeto-logistico.git
-cd projeto-logistico
-python scripts/etl.py
+```text
+app.py                  -> rotas Flask
+logimax/data_sources.py -> leitura e validacao dos CSVs
+logimax/analytics.py    -> calculo dos KPIs e datasets
+logimax/serializers.py  -> conversao segura para JSON
+templates/index.html    -> dashboard
+static/vendor/          -> dependencias frontend locais
 ```
 
----
+Veja mais em [ARQUITETURA.md](ARQUITETURA.md).
 
-## 👩‍💻 11. Autora
+## Como rodar localmente
 
-**Samantha Lobo**  
-Analista de Dados & ADS  
-
-## 📂 Estrutura do Projeto (Atualizada)
-
-### **02_etl_pipeline.ipynb**
-Notebook responsável pelo processo ETL:
-- Importa as três tabelas base
-- Normaliza e trata colunas
-- Realiza junções
-- Cria dimensões:
-  - dim_cliente
-  - dim_produto
-  - dim_estoque
-  - dim_separacao
-- Calcula métricas logísticas:
-  - lead time
-  - atraso
-  - fill rate
-- Gera a tabela **fato_pedidos**
-
-Tudo salvo em **output/**.
-
----
-
-### **03_auditoria_inconsistencias.ipynb**
-Executa verificações automáticas de problemas nos dados:
-- pedidos sem entrega
-- entregas com data menor que envio
-- estoque inconsistente
-- quantidade de separação maior que a pedida
-- custo de transporte zero
-- fill rate baixo
-- lead time negativo
-- atrasos acima do previsto
-
-O notebook exibe os resultados diretamente na tela.
-
----
-
-### **04_documentacao_projeto_final.ipynb**
-Notebook com:
-- Introdução do projeto
-- Explicação dos sistemas (ERP, WMS, TMS)
-- Diagrama lógico
-- Dicionário de dados
-- Fluxo ETL
-- Métricas criadas
-- Checklist de auditoria
-- Conclusão
-
-
-## 🗄️ Uso de SQL no Projeto
-Além do Python e Power BI, o projeto utilizou **SQL** para garantir consistência, validação e análises intermediárias essenciais para os processos logísticos.
-
-As principais queries aplicadas foram utilizadas para:
-- Validar integridade entre ERP, WMS e TMS
-- Identificar pedidos órfãos
-- Medir atraso, lead time e divergências de estoque
-- Criar tabelas intermediárias antes do processo ETL
-
-### 🔍 Consultas SQL utilizadas
-
-**1. Pedidos sem vínculo com transporte (TMS)**
-```sql
-SELECT p.order_id
-FROM erp_pedidos p
-LEFT JOIN tms_entregas t
-    ON p.order_id = t.order_id
-WHERE t.order_id IS NULL;
+```powershell
+pip install -r requirements.txt
+python app.py
 ```
 
-**2. Divergências entre quantidade pedida e separada**
-```sql
-SELECT 
-    s.order_id,
-    s.qtd_separada,
-    p.qtd_pedida,
-    (p.qtd_pedida - s.qtd_separada) AS divergencia
-FROM wms_separacao s
-JOIN erp_pedidos p
-    ON s.order_id = p.order_id
-WHERE s.qtd_separada <> p.qtd_pedida;
+Acesse:
+
+```text
+http://127.0.0.1:5000
 ```
 
-**3. Cálculo do Lead Time**
-```sql
-SELECT 
-    order_id,
-    DATEDIFF(day, data_pedido, data_entrega) AS lead_time
-FROM tms_entregas;
+## APIs principais
+
+```text
+GET /api/kpis
+GET /api/status-pedidos
+GET /api/pedidos-por-dia
+GET /api/custo-por-modal
+GET /api/data-quality
+GET /api/pedidos-tabela
+GET /api/estoque-tabela
+GET /api/transporte-tabela
+GET /api/health
 ```
 
-**4. Cálculo do Atraso**
-```sql
-SELECT 
-    order_id,
-    CASE WHEN data_entrega > data_prevista
-         THEN DATEDIFF(day, data_prevista, data_entrega)
-         ELSE 0
-    END AS atraso
-FROM tms_entregas;
-```
+## Qualidade de dados encontrada
 
-**5. Estoque inconsistentes / rupturas**
-```sql
-SELECT produto_id, estoque_atual
-FROM wms_estoque
-WHERE estoque_atual < 0;
-```
+Veja [ANALISE_MELHORIAS.md](ANALISE_MELHORIAS.md) para detalhes de como os
+problemas foram encontrados e como os resultados corrigidos foram calculados.
 
-Essa camada SQL foi essencial para garantir a qualidade dos dados utilizados no ETL e para reforçar as validações que sustentam as métricas logísticas do projeto.
+Principais achados:
 
+- Fill rate anterior estava inflado por erro de granularidade.
+- Receita anterior considerava pedidos cancelados.
+- Rotatividade anterior estava fora de escala.
+- Havia variacoes simuladas no codigo.
+- Ha taxa de cancelamento alta e divergencias de inventario.
 
-![Lead Time](Captura de tela_19-11-2025_134412_app.powerbi.com.jpeg)
+## CI/CD
 
-https://github.com/SamLoboTi/LOGIMAX.PROJETO-/commit/6d56aa84e43db627939ee2c8908c7e2af933d35b
+O projeto possui pipeline GitHub Actions em `.github/workflows/ci.yml`.
 
+A pipeline valida:
 
+- sintaxe Python;
+- CSVs obrigatorios;
+- estrutura basica do HTML;
+- subida do Flask;
+- endpoints principais da API.
 
+Veja [CI_CD.md](CI_CD.md).
 
+## Nivel de maturidade demonstrado
 
+Depois da revisao, o projeto sai de um nivel junior funcional para uma entrega
+mais proxima de pleno em engenharia de dados e analytics, com alguns sinais de
+senioridade em documentacao, confiabilidade de metricas, CI/CD inicial e
+explicacao de decisoes.
 
+Ainda existem evolucoes para ficar mais proximo de um produto senior em
+producao:
 
+- autenticar APIs;
+- restringir CORS por ambiente;
+- criar testes unitarios para cada formula de KPI;
+- separar frontend em arquivos menores;
+- criar deploy publico estavel;
+- adicionar observabilidade, logs estruturados e variaveis de ambiente.
 
+## Documentacao de apoio
 
+- [PROJECT.md](PROJECT.md)
+- [CONTEXT.md](CONTEXT.md)
+- [BACKLOG.md](BACKLOG.md)
+- [ARQUITETURA.md](ARQUITETURA.md)
+- [ANALISE_MELHORIAS.md](ANALISE_MELHORIAS.md)
+- [CI_CD.md](CI_CD.md)
 
+## Observacao sobre graficos
 
-
-
-
-
-
-
-
-
+O Chart.js foi salvo localmente em `static/vendor/chart.umd.js`. Isso evita o
+erro anterior em que os graficos nao carregavam quando o CDN externo falhava.

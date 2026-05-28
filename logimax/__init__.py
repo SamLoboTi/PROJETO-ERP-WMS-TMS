@@ -1,0 +1,2 @@
+"""LogiMAX analytics package."""
+

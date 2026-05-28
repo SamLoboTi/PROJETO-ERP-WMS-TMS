@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LogiMAX | Logistics Intelligence Platform</title>
-    <!-- Chart.js UMD Build (Better compatibility) -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <!-- Chart.js local para o dashboard funcionar mesmo sem CDN externo -->
+    <script src="/static/vendor/chart.umd.js"></script>
     <script>
-        // Fallback se o CDN principal falhar
+        // Fallback externo se o arquivo local nao estiver disponivel
         if (typeof Chart === 'undefined') {
             document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"><\/script>');
         }
@@ -25,20 +25,23 @@
         }
 
         :root {
-            --bg-primary: #1a1f3a;
-            --bg-secondary: #242d4a;
-            --bg-tertiary: #2d3855;
-            --primary: #4a7bff;
-            --primary-light: #6b92ff;
-            --success: #2dd4ac;
-            --warning: #fbbf24;
-            --error: #ff6b6b;
-            --info: #8b5cf6;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --border: #3a4556;
-            --border-light: #4a5568;
+            --bg-primary: #fff1f6;
+            --bg-secondary: #fff8fb;
+            --bg-tertiary: #f8dce8;
+            --primary: #d9468f;
+            --primary-light: #f472b6;
+            --success: #2f9f8f;
+            --warning: #d97706;
+            --error: #dc3d68;
+            --info: #9d5ad6;
+            --text-primary: #3f1730;
+            --text-secondary: #8f5a73;
+            --text-muted: #a9798d;
+            --border: #f1bfd2;
+            --border-light: #f6d5e1;
+            --panel: rgba(255, 255, 255, 0.74);
+            --panel-strong: rgba(255, 250, 253, 0.92);
+            --shadow-pink: rgba(217, 70, 143, 0.18);
         }
 
         html {
@@ -47,7 +50,10 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, #141829 100%);
+            background:
+                radial-gradient(circle at top left, rgba(244, 114, 182, 0.22), transparent 32%),
+                radial-gradient(circle at 85% 12%, rgba(251, 207, 232, 0.55), transparent 28%),
+                linear-gradient(135deg, #fff1f6 0%, #ffe4ee 45%, #fff8fb 100%);
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
@@ -64,11 +70,12 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(20, 24, 41, 0.7);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 248, 251, 0.82);
+            backdrop-filter: blur(18px);
             border-bottom: 1px solid var(--border);
             padding: 16px 24px;
             margin-bottom: 32px;
+            box-shadow: 0 8px 28px rgba(217, 70, 143, 0.08);
         }
 
         .header-content {
@@ -88,14 +95,14 @@
             width: 40px;
             height: 40px;
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: 10px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 20px;
             font-weight: 700;
             color: white;
-            box-shadow: 0 4px 16px rgba(74, 123, 255, 0.3);
+            box-shadow: 0 8px 22px rgba(217, 70, 143, 0.28);
         }
 
         .header-title {
@@ -125,7 +132,7 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), #8b5cf6);
+            background: linear-gradient(135deg, #d9468f, #9d5ad6);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -139,7 +146,7 @@
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 999px;
             cursor: pointer;
             font-size: 13px;
             font-weight: 600;
@@ -147,12 +154,12 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 12px rgba(74, 123, 255, 0.25);
+            box-shadow: 0 8px 18px rgba(217, 70, 143, 0.22);
         }
 
         .refresh-btn:hover:not(.loading) {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 123, 255, 0.35);
+            box-shadow: 0 12px 26px rgba(217, 70, 143, 0.28);
         }
 
         .refresh-btn.loading {
@@ -205,7 +212,7 @@
         }
 
         .kpi-card {
-            border-radius: 10px;
+            border-radius: 8px;
             padding: 12px;
             height: 110px;
             display: flex;
@@ -214,7 +221,8 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            box-shadow: 0 14px 30px rgba(143, 90, 115, 0.11);
         }
 
         .kpi-card::before {
@@ -224,7 +232,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            border-radius: 12px;
+            border-radius: 8px;
             z-index: 0;
             transition: all 0.3s ease;
         }
@@ -236,12 +244,12 @@
 
         .kpi-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 18px 42px rgba(217, 70, 143, 0.2);
         }
 
         /* KPI Card 1 - Lead Time (Amarelo Claro) */
         .kpi-card.kpi-1::before {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
         }
 
         .kpi-card.kpi-1 .kpi-label {
@@ -263,51 +271,51 @@
 
         /* KPI Card 2 - Fill Rate (Teal Claro) */
         .kpi-card.kpi-2::before {
-            background: linear-gradient(135deg, #ccfbf1 0%, #a7f3d0 100%);
+            background: linear-gradient(135deg, #fdf2f8 0%, #fbcfe8 100%);
         }
 
         .kpi-card.kpi-2 .kpi-label {
-            color: #134e4a;
+            color: #9d174d;
             font-weight: 700;
         }
 
         .kpi-card.kpi-2 .kpi-value {
-            color: #0d3331;
+            color: #831843;
         }
 
         .kpi-card.kpi-2 .kpi-icon {
-            color: #0d9488;
+            color: #db2777;
         }
 
         .kpi-card.kpi-2 .kpi-unit {
-            color: #115e59;
+            color: #9d174d;
         }
 
         /* KPI Card 3 - Receita Total (Azul Claro) */
         .kpi-card.kpi-3::before {
-            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            background: linear-gradient(135deg, #fff1f2 0%, #fecdd3 100%);
         }
 
         .kpi-card.kpi-3 .kpi-label {
-            color: #1e40af;
+            color: #9f1239;
             font-weight: 700;
         }
 
         .kpi-card.kpi-3 .kpi-value {
-            color: #0c2d6b;
+            color: #881337;
         }
 
         .kpi-card.kpi-3 .kpi-icon {
-            color: #2563eb;
+            color: #e11d48;
         }
 
         .kpi-card.kpi-3 .kpi-unit {
-            color: #1e3a8a;
+            color: #9f1239;
         }
 
         /* KPI Card 4 - Entregas Prazo (Verde Claro) */
         .kpi-card.kpi-4::before {
-            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            background: linear-gradient(135deg, #ecfdf5 0%, #b7f7df 100%);
         }
 
         .kpi-card.kpi-4 .kpi-label {
@@ -329,7 +337,7 @@
 
         /* KPI Card 5 - Rotatividade (Roxo Claro) */
         .kpi-card.kpi-5::before {
-            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            background: linear-gradient(135deg, #f5f3ff 0%, #ddd6fe 100%);
         }
 
         .kpi-card.kpi-5 .kpi-label {
@@ -351,7 +359,7 @@
 
         /* KPI Card 6 - Acuracidade (Coral Claro) */
         .kpi-card.kpi-6::before {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            background: linear-gradient(135deg, #ffe4e6 0%, #fda4af 100%);
         }
 
         .kpi-card.kpi-6 .kpi-label {
@@ -373,7 +381,7 @@
 
         /* KPI Card 7 - Inconsistências (Vermelho Claro) */
         .kpi-card.kpi-7::before {
-            background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+            background: linear-gradient(135deg, #fce7f3 0%, #f9a8d4 100%);
         }
 
         .kpi-card.kpi-7 .kpi-label {
@@ -453,25 +461,26 @@
         }
 
         .chart-container {
-            background: linear-gradient(135deg, rgba(36, 45, 74, 0.6), rgba(45, 56, 85, 0.3));
-            backdrop-filter: blur(8px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(255, 241, 246, 0.62));
+            backdrop-filter: blur(14px);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 8px;
             padding: 20px;
             display: flex;
             flex-direction: column;
             min-height: 400px;
             transition: all 0.3s ease;
+            box-shadow: 0 18px 46px rgba(143, 90, 115, 0.12);
         }
 
         .chart-container:hover {
             border-color: var(--primary);
-            box-shadow: 0 8px 24px rgba(74, 123, 255, 0.15);
+            box-shadow: 0 20px 52px rgba(217, 70, 143, 0.16);
         }
 
         .chart-container:hover {
             border-color: var(--primary);
-            box-shadow: 0 8px 24px rgba(74, 123, 255, 0.15);
+            box-shadow: 0 20px 52px rgba(217, 70, 143, 0.16);
         }
 
         .chart-header {
@@ -540,12 +549,13 @@
         }
 
         .table-container {
-            background: linear-gradient(135deg, rgba(36, 45, 74, 0.6), rgba(45, 56, 85, 0.3));
-            backdrop-filter: blur(8px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 241, 246, 0.68));
+            backdrop-filter: blur(14px);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
             transition: all 0.3s ease;
+            box-shadow: 0 18px 46px rgba(143, 90, 115, 0.12);
         }
 
         .table-container:hover {
@@ -597,7 +607,7 @@
         }
 
         th {
-            background: rgba(20, 24, 41, 0.5);
+            background: rgba(255, 228, 238, 0.62);
             color: var(--text-secondary);
             padding: 12px 16px;
             text-align: left;
@@ -617,7 +627,7 @@
         }
 
         tr:hover {
-            background: rgba(74, 123, 255, 0.08);
+            background: rgba(244, 114, 182, 0.1);
         }
 
         .tab-content {
@@ -647,9 +657,9 @@
         }
 
         .status-emitido {
-            background: rgba(74, 123, 255, 0.2);
+            background: rgba(244, 114, 182, 0.18);
             color: var(--primary);
-            border: 1px solid rgba(74, 123, 255, 0.4);
+            border: 1px solid rgba(217, 70, 143, 0.32);
         }
 
         .status-cancelado {
@@ -897,7 +907,7 @@
                         <div class="chart-title">
                             <i class="fas fa-chart-line"></i> 📈 Tendência de Lead Time
                         </div>
-                        <div style="font-size: 11px; color: #94a3b8;">Últimos 30 dias</div>
+                        <div style="font-size: 11px; color: var(--text-secondary);">Últimos 30 dias</div>
                     </div>
                     <div class="chart-wrapper">
                         <canvas id="chart-pedidos"></canvas>
@@ -909,7 +919,7 @@
                         <div class="chart-title">
                             <i class="fas fa-check-circle"></i> ✅ Status de Pedidos
                         </div>
-                        <div style="font-size: 11px; color: #94a3b8;">Total: 13.000</div>
+                        <div id="status-total" style="font-size: 11px; color: var(--text-secondary);">Total: --</div>
                     </div>
                     <div class="chart-wrapper">
                         <canvas id="chart-status"></canvas>
@@ -921,7 +931,7 @@
                         <div class="chart-title">
                             <i class="fas fa-truck"></i> 🚚 Custo Logístico por Modal
                         </div>
-                        <div style="font-size: 11px; color: #94a3b8;">Últimos 30 dias</div>
+                        <div style="font-size: 11px; color: var(--text-secondary);">Últimos 30 dias</div>
                     </div>
                     <div class="chart-wrapper">
                         <canvas id="chart-custos"></canvas>
@@ -933,7 +943,7 @@
                         <div class="chart-title">
                             <i class="fas fa-map-pin"></i> 📍 Localização por Distância
                         </div>
-                        <div style="font-size: 11px; color: #94a3b8;">Custo x Distância (km)</div>
+                        <div style="font-size: 11px; color: var(--text-secondary);">Custo x Distância (km)</div>
                     </div>
                     <div class="chart-wrapper">
                         <canvas id="chart-scatter"></canvas>
@@ -1137,7 +1147,7 @@
                 // Gerar dados de scatter (Custo x Distância x Modal)
                 const scatterData = [];
                 if (custos.labels && custos.data) {
-                    const cores = ['#3b82f6', '#f59e0b', '#10b981', '#8b5cf6'];
+                    const cores = ['#d9468f', '#f59e0b', '#2f9f8f', '#9d5ad6'];
                     custos.labels.forEach((label, idx) => {
                         const distancia = Array.isArray(custos.distancia) ? custos.distancia[idx] : 0;
                         scatterData.push({
@@ -1162,6 +1172,11 @@
                 }
 
                 if (status.labels && status.data && status.data.length > 0) {
+                    const statusTotalEl = document.getElementById('status-total');
+                    if (statusTotalEl) {
+                        const totalStatus = status.total || status.data.reduce((a, b) => a + b, 0);
+                        statusTotalEl.textContent = 'Total: ' + totalStatus.toLocaleString('pt-BR');
+                    }
                     createStatusChart('chart-status', status.labels, status.data);
                 } else {
                     console.warn('Dados de status incompletos:', status);
@@ -1213,8 +1228,8 @@
 
                 // Gradient para a área sob a linha
                 const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-                gradient.addColorStop(0, 'rgba(74, 123, 255, 0.2)');
-                gradient.addColorStop(1, 'rgba(74, 123, 255, 0)');
+                gradient.addColorStop(0, 'rgba(217, 70, 143, 0.24)');
+                gradient.addColorStop(1, 'rgba(217, 70, 143, 0)');
 
                 charts[chartId] = new Chart(ctx, {
                     type: 'line',
@@ -1224,13 +1239,13 @@
                             {
                                 label: 'Lead Time Real',
                                 data: data,
-                                borderColor: '#4a7bff',
+                                borderColor: '#d9468f',
                                 backgroundColor: gradient,
                                 borderWidth: 3,
                                 fill: true,
                                 tension: 0.45,
                                 pointRadius: 5,
-                                pointBackgroundColor: '#4a7bff',
+                                pointBackgroundColor: '#d9468f',
                                 pointBorderColor: '#fff',
                                 pointBorderWidth: 2,
                                 pointHoverRadius: 7,
@@ -1239,7 +1254,7 @@
                             {
                                 label: 'Meta SLA',
                                 data: Array(labels.length).fill(10),
-                                borderColor: '#2dd4ac',
+                                borderColor: '#2f9f8f',
                                 borderWidth: 2,
                                 borderDash: [5, 5],
                                 fill: false,
@@ -1269,7 +1284,7 @@
                                 padding: 10,
                                 titleFont: { size: 12, weight: 'bold' },
                                 bodyFont: { size: 11 },
-                                borderColor: '#4a7bff',
+                                borderColor: '#d9468f',
                                 borderWidth: 1,
                                 cornerRadius: 4,
                                 callbacks: {
@@ -1289,7 +1304,7 @@
                                 min: 6,
                                 max: 16,
                                 ticks: {
-                                    color: '#94a3b8',
+                                    color: '#8f5a73',
                                     font: { size: 10, weight: '500' },
                                     stepSize: 2,
                                 },
@@ -1300,7 +1315,7 @@
                             },
                             x: {
                                 ticks: {
-                                    color: '#94a3b8',
+                                    color: '#8f5a73',
                                     font: { size: 10, weight: '500' },
                                 },
                                 grid: { display: false, drawBorder: false }
@@ -1330,7 +1345,7 @@
             try {            // Calcular percentuais e cores
                 const total = data.reduce((a, b) => a + b, 0);
                 const percentuais = data.map(d => ((d / total) * 100).toFixed(1));
-                const cores = ['#2dd4ac', '#3b82f6', '#ef4444'];
+                const cores = ['#2f9f8f', '#d9468f', '#dc3d68'];
 
                 const ctx = canvas.getContext('2d');
 
@@ -1365,7 +1380,7 @@
                                 padding: 12,
                                 titleFont: { size: 13, weight: 'bold' },
                                 bodyFont: { size: 12 },
-                                borderColor: '#3b82f6',
+                                borderColor: '#d9468f',
                                 borderWidth: 1.5,
                                 cornerRadius: 6,
                                 callbacks: {
@@ -1389,7 +1404,7 @@
                                 beginAtZero: true,
                                 max: total,
                                 ticks: {
-                                    color: '#94a3b8',
+                                    color: '#8f5a73',
                                     font: { size: 11, weight: '500' },
                                     callback: function (value) {
                                         return ((value / total) * 100).toFixed(0) + '%';
@@ -1402,7 +1417,7 @@
                             },
                             y: {
                                 ticks: {
-                                    color: '#94a3b8',
+                                    color: '#8f5a73',
                                     font: { size: 12, weight: '600' }
                                 },
                                 grid: { display: false, drawBorder: false }
@@ -1450,16 +1465,16 @@
                     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
                     if (idx === 0) {
                         // Primeira barra (maior custo) - Gradiente azul
-                        gradient.addColorStop(0, '#3b82f6');
-                        gradient.addColorStop(1, '#2563eb');
+                        gradient.addColorStop(0, '#d9468f');
+                        gradient.addColorStop(1, '#be185d');
                     } else if (idx === 1) {
                         // Segunda barra - Gradiente laranja
                         gradient.addColorStop(0, '#f59e0b');
                         gradient.addColorStop(1, '#d97706');
                     } else if (idx === 2) {
                         // Terceira barra - Gradiente verde
-                        gradient.addColorStop(0, '#2dd4ac');
-                        gradient.addColorStop(1, '#1aa179');
+                        gradient.addColorStop(0, '#f472b6');
+                        gradient.addColorStop(1, '#db2777');
                     } else {
                         // Demais barras - Gradiente roxo
                         gradient.addColorStop(0, '#a855f7');
@@ -1497,7 +1512,7 @@
                                 padding: 12,
                                 titleFont: { size: 13, weight: 'bold' },
                                 bodyFont: { size: 12 },
-                                borderColor: '#3b82f6',
+                                borderColor: '#d9468f',
                                 borderWidth: 1.5,
                                 cornerRadius: 6,
                                 callbacks: {
@@ -1523,7 +1538,7 @@
                             y: {
                                 beginAtZero: true,
                                 ticks: {
-                                    color: '#94a3b8',
+                                    color: '#8f5a73',
                                     font: { size: 11, weight: '500' },
                                     callback: function (value) {
                                         return 'R$ ' + value.toLocaleString('pt-BR');
@@ -1537,7 +1552,7 @@
                             },
                             x: {
                                 ticks: {
-                                    color: '#94a3b8',
+                                    color: '#8f5a73',
                                     font: { size: 11, weight: '500' }
                                 },
                                 grid: {
@@ -1595,7 +1610,7 @@
                                 padding: 12,
                                 titleFont: { size: 13, weight: 'bold' },
                                 bodyFont: { size: 12 },
-                                borderColor: '#3b82f6',
+                                borderColor: '#d9468f',
                                 borderWidth: 1.5,
                                 cornerRadius: 6,
                                 callbacks: {
@@ -1618,11 +1633,11 @@
                                 title: {
                                     display: true,
                                     text: 'Distância (km)',
-                                    color: '#94a3b8',
+                                    color: '#8f5a73',
                                     font: { size: 12, weight: '600' }
                                 },
                                 ticks: {
-                                    color: '#94a3b8',
+                                    color: '#8f5a73',
                                     font: { size: 11 },
                                     callback: function (value) {
                                         return value.toLocaleString('pt-BR');
@@ -1637,11 +1652,11 @@
                                 title: {
                                     display: true,
                                     text: 'Custo Logístico (R$)',
-                                    color: '#94a3b8',
+                                    color: '#8f5a73',
                                     font: { size: 12, weight: '600' }
                                 },
                                 ticks: {
-                                    color: '#94a3b8',
+                                    color: '#8f5a73',
                                     font: { size: 11 },
                                     callback: function (value) {
                                         return 'R$ ' + value.toLocaleString('pt-BR');

@@ -1,51 +1,68 @@
-"""Teste de validação do HTML do dashboard"""
+"""Validate the dashboard HTML structure with simple static checks."""
+
 import re
+import sys
 
-# Ler o arquivo HTML
-with open('templates/index.html', 'r', encoding='utf-8') as f:
-    html_content = f.read()
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
-# Verificar se há canvas elements
+with open("templates/index.html", "r", encoding="utf-8") as file:
+    html_content = file.read()
+
 canvas_elements = re.findall(r'<canvas\s+id=["\']([^"\']+)["\'][^>]*>', html_content)
-print(f"✅ Canvas elementos encontrados: {canvas_elements}")
+print(f"[OK] Canvas elementos encontrados: {canvas_elements}")
 
-# Verificar se há referências aos canvas elementos no JavaScript
+if not canvas_elements:
+    print("[ERRO] Nenhum canvas encontrado no dashboard.")
+    raise SystemExit(1)
+
 for canvas_id in canvas_elements:
     pattern = rf"document\.getElementById\(['\"]({re.escape(canvas_id)})['\"]"
     matches = re.findall(pattern, html_content)
-    print(f"   - {canvas_id}: {len(matches)} referências encontradas")
+    print(f"   - {canvas_id}: {len(matches)} referencias encontradas")
 
-# Verificar se funções estão definidas
-functions = ['createLineChart', 'createStatusChart', 'createBarChart', 'createScatterChart', 'loadCharts', 'loadDashboard']
-for func in functions:
-    pattern = rf"function {func}\s*\("
+functions = [
+    "createLineChart",
+    "createStatusChart",
+    "createBarChart",
+    "createScatterChart",
+    "loadCharts",
+    "loadDashboard",
+]
+
+missing_functions = []
+for function_name in functions:
+    pattern = rf"function {function_name}\s*\("
     matches = re.findall(pattern, html_content)
-    print(f"✅ Função '{func}': {'DEFINIDA' if matches else '❌ NÃO ENCONTRADA'}")
+    status = "DEFINIDA" if matches else "NAO ENCONTRADA"
+    print(f"[OK] Funcao '{function_name}': {status}")
+    if not matches:
+        missing_functions.append(function_name)
 
-# Verificar se há erros de sintaxe JavaScript comum
 issues = []
 
-# Verificar colchetes/parênteses desbalanceados
-open_braces = html_content.count('{')
-close_braces = html_content.count('}')
+open_braces = html_content.count("{")
+close_braces = html_content.count("}")
 if open_braces != close_braces:
-    issues.append(f"⚠️ Desbalanceamento de chaves: {open_braces} open vs {close_braces} close")
+    issues.append(f"Desbalanceamento de chaves: {open_braces} open vs {close_braces} close")
 
-# Verificar parênteses
-open_parens = html_content.count('(')
-close_parens = html_content.count(')')
+open_parens = html_content.count("(")
+close_parens = html_content.count(")")
 if open_parens != close_parens:
-    issues.append(f"⚠️ Desbalanceamento de parênteses: {open_parens} open vs {close_parens} close")
+    issues.append(f"Desbalanceamento de parenteses: {open_parens} open vs {close_parens} close")
 
-if issues:
-    print("\n⚠️ Potenciais problemas:")
+api_calls = sorted(set(re.findall(r"fetch\(['\"]([^'\"]+)['\"]", html_content)))
+print(f"\n[OK] Chamadas de API encontradas: {api_calls}")
+
+if "/static/vendor/chart.umd.js" not in html_content:
+    issues.append("Chart.js local nao encontrado no HTML.")
+
+if missing_functions or issues:
+    print("\n[ERRO] Potenciais problemas:")
+    for function_name in missing_functions:
+        print(f"   Funcao ausente: {function_name}")
     for issue in issues:
         print(f"   {issue}")
-else:
-    print("\n✅ Sem problemas óbvios de sintaxe")
+    raise SystemExit(1)
 
-# Verificar referências às APIs
-api_calls = re.findall(r"fetch\(['\"]([^'\"]+)['\"]", html_content)
-print(f"\n✅ Chamadas de API encontradas: {set(api_calls)}")
-
-print("\n✅ Validação concluída!")
+print("\n[OK] Validacao concluida!")
