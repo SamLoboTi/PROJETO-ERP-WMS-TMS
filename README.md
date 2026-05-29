@@ -105,6 +105,12 @@ Acesse:
 http://127.0.0.1:5000
 ```
 
+Link publico oficial do tunelamento:
+
+```text
+https://pitch-milk-perry-catalyst.trycloudflare.com
+```
+
 ## APIs principais
 
 ```text
