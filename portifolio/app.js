@@ -16,7 +16,7 @@ const seedRepos = [
     name: "Dashboard-Power-BI-MiBusca-Crescimento-Clientes",
     description: "Dashboard Power BI para crescimento de clientes, vendas, financeiro, LTV, contratos, fidelidade e medidas DAX.",
     language: "Power BI",
-    html_url: "https://github.com/SamLoboTi/LOGIMAX.PROJETO-/tree/codex/realtime-restructure-validation/portifolio/assets/mibusca-powerbi",
+    html_url: "https://github.com/SamLoboTi/PROJETO-ERP-WMS-TMS/tree/codex/realtime-restructure-validation/portifolio/assets/mibusca-powerbi",
     homepage: "assets/mibusca-powerbi/README.md",
     stargazers_count: 0,
     forks_count: 0,
