@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfólio de Samantha Lobo: produtos de Dados, BI, ETL, SQL, Python, automação e aprendizagem gamificada."
+    />
+    <meta name="author" content="SamLoboTi" />
+    <link rel="canonical" href="https://samantha-lobo.pages.dev/#projetos" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content="Samantha Lobo | Dados, BI e Engenharia de Dados" />
+    <meta
+      property="og:description"
+      content="Projetos de Dados, BI e Engenharia de Dados: analytics, ETL, qualidade, automação e educação gamificada."
+    />
+    <meta property="og:url" content="https://samantha-lobo.pages.dev/#projetos" />
+    <meta name="twitter:card" content="summary" />
+    <title>Samantha Lobo | Dados, BI e Engenharia de Dados</title>
+    <script>
+      if (window.location.protocol === "file:") {
+        window.location.replace(`https://samantha-lobo.pages.dev/${window.location.hash || "#projetos"}`);
+      }
+    </script>
+    <link rel="preconnect" href="https://api.github.com" />
+    <link rel="preconnect" href="https://avatars.githubusercontent.com" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <canvas id="motion-field" aria-hidden="true"></canvas>
+
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="Ir para o inicio">
+        <span class="brand-mark">SL</span>
+        <span>SamLoboTi</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Navegacao principal">
+        <a href="#projetos">Projetos</a>
+        <a href="#github">GitHub</a>
+        <a href="#curriculo">Currículo</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="inicio" class="hero">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Dados, BI e Engenharia de Dados</span>
+          <h1>Transformo dados em decisões, produtos e aprendizagem</h1>
+          <p>
+            Projetos práticos com Python, SQL, Power BI, ETL, qualidade de dados,
+            dashboards e produtos educacionais que conectam tecnologia a problemas reais.
+          </p>
+
+          <div class="hero-actions" aria-label="Acoes principais">
+            <a class="primary-action" href="https://samantha-lobo.pages.dev/#projetos">
+              <i data-lucide="sparkles"></i>
+              Ver projetos
+            </a>
+            <a class="secondary-action" href="https://github.com/SamLoboTi" target="_blank" rel="noreferrer">
+              <i data-lucide="github"></i>
+              GitHub
+            </a>
+            <a
+              class="secondary-action"
+              href="https://www.linkedin.com/in/samantha-lobo-ocireu/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <i data-lucide="linkedin"></i>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-stage reveal" aria-label="Previa do portfolio">
+          <div class="device-shell">
+            <div class="device-toolbar">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="stage-showcase">
+              <div class="stage-slide video-slide codeki-slide">
+                <video autoplay muted loop playsinline preload="metadata" aria-label="Demonstração da plataforma educacional Code Ki">
+                  <source src="code-ki-game-tour-cinematic-goku.webm" type="video/webm" />
+                </video>
+                <div class="slide-copy">
+                  <span class="panel-label">Game</span>
+                  <strong>Code Ki</strong>
+                  <small>EdTech para formação em Dados</small>
+                </div>
+              </div>
+
+              <div class="stage-slide video-slide think-slide">
+                <video
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  poster="think-hero-poster.png"
+                  aria-label="Demo em video do projeto Think"
+                >
+                  <source src="think-dashboard-demo-seguro.webm" type="video/webm" />
+                </video>
+                <div class="slide-copy">
+                  <span class="panel-label">Business</span>
+                  <strong>Think</strong>
+                  <small>monitoramento e automacao</small>
+                </div>
+              </div>
+
+              <div class="stage-slide panels-slide">
+                <div class="live-grid">
+                  <div class="live-panel tall">
+                    <span class="panel-label">BI</span>
+                    <strong>Logimax</strong>
+                    <small>dados, KPIs e operacao</small>
+                  </div>
+                  <div class="live-panel">
+                    <span class="panel-label">App</span>
+                    <strong>Smart Factory</strong>
+                    <small>monitoramento</small>
+                  </div>
+                  <div class="live-panel">
+                    <span class="panel-label">Game</span>
+                    <strong>Experimentos</strong>
+                    <small>interfaces interativas</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="stats-strip reveal" aria-label="Resumo profissional">
+        <div>
+          <strong id="repo-count">9</strong>
+          <span>repositorios publicos</span>
+        </div>
+        <div>
+          <strong>20 mil+</strong>
+          <span>desafios educacionais no Code Ki</span>
+        </div>
+        <div>
+          <strong>Data Products</strong>
+          <span>analytics, engenharia e automação</span>
+        </div>
+      </section>
+
+      <section id="projetos" class="section-block">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Projetos em destaque</span>
+          <h2>Produtos de Dados que unem engenharia, análise e impacto</h2>
+        </div>
+
+        <div class="featured-grid">
+          <article class="preview-card preview-card-wide reveal accent-preview">
+            <a
+              class="preview-frame image-preview"
+              href="marketing-pyspark-dashboard.html"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Abrir dashboard do projeto Marketing Analytics com PySpark"
+            >
+              <img
+                src="marketing-pyspark-workspace.png"
+                alt="Projeto Marketing Analytics com PySpark apresentado em um workspace de dados"
+                loading="lazy"
+              />
+              <div class="preview-fallback">
+                <i data-lucide="bar-chart-3"></i>
+                <span>Abrir dashboard</span>
+              </div>
+            </a>
+            <div class="card-copy">
+              <span class="project-type">Engenharia de Dados / Marketing Analytics</span>
+              <h3>Marketing Analytics com PySpark</h3>
+              <p>
+                O case começou com uma pergunta simples: estamos enviando muitos e-mails, mas eles realmente geram resultado?
+                Eu conectei clientes, campanhas, interações e vendas para separar abertura de conversão e receita.
+              </p>
+              <ul class="project-highlights" aria-label="Destaques do projeto Marketing Analytics">
+                <li><strong>Problema real:</strong> dados separados e métricas sem uma visão única da jornada.</li>
+                <li><strong>Prioridade:</strong> garantir qualidade e conectar contato, clique, compra e receita.</li>
+                <li><strong>Entrega:</strong> PySpark, CSV/Parquet, testes, gráficos e dashboard interativo.</li>
+              </ul>
+              <a href="marketing-pyspark-dashboard.html" target="_blank" rel="noreferrer">
+                Explorar dashboard <i data-lucide="bar-chart-3"></i>
+              </a>
+              <a href="https://github.com/SamLoboTi/Marketing-Analytics-com-PySpark" target="_blank" rel="noreferrer">
+                Ver código no GitHub <i data-lucide="github"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="preview-card preview-card-wide reveal powerbi-card">
+            <a
+              class="preview-frame image-preview powerbi-preview"
+              href="assets/mibusca-powerbi/README.md"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Abrir case do dashboard Power BI MiBusca"
+            >
+              <img
+                src="assets/mibusca-powerbi/dashboard-financeiro.png"
+                alt="Dashboard financeiro Power BI MiBusca com receita total, LTV, lojas ativas e tempo de cliente"
+                loading="lazy"
+              />
+              <div class="powerbi-thumbs" aria-hidden="true">
+                <img src="assets/mibusca-powerbi/performance-vendas.png" alt="" loading="lazy" />
+                <img src="assets/mibusca-powerbi/operacao-sucesso-cliente.png" alt="" loading="lazy" />
+                <img src="assets/mibusca-powerbi/crescimento-clientes.png" alt="" loading="lazy" />
+              </div>
+              <div class="preview-fallback">
+                <i data-lucide="bar-chart-3"></i>
+                <span>Abrir case</span>
+              </div>
+            </a>
+            <div class="card-copy">
+              <span class="project-type">Power BI / Customer Success Analytics</span>
+              <h3>MiBusca - Crescimento, Vendas e Financeiro</h3>
+              <p>
+                Dashboard Power BI para acompanhar crescimento de clientes, receita, contratos,
+                carteira, fidelidade e performance comercial em uma navegacao executiva por area.
+              </p>
+              <ul class="project-highlights" aria-label="Destaques do projeto Power BI MiBusca">
+                <li><strong>KPIs:</strong> Receita Total, LTV, Lojas Ativas, Ticket Medio, Contratos Fechados e Faturamento Atual.</li>
+                <li><strong>Modelo:</strong> tabelas de dados, calendario e camada de medidas DAX para churn, retencao e crescimento.</li>
+                <li><strong>Entrega:</strong> paginas para financeiro, vendas, sucesso do cliente e crescimento da base.</li>
+              </ul>
+              <a href="assets/mibusca-powerbi/README.md" target="_blank" rel="noreferrer">
+                Ver documentacao do case <i data-lucide="file-text"></i>
+              </a>
+              <a href="assets/mibusca-powerbi/dashboard-financeiro.png" target="_blank" rel="noreferrer">
+                Abrir imagem principal <i data-lucide="image"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="preview-card reveal">
+            <button
+              class="preview-frame preview-trigger"
+              type="button"
+              data-video-src="code-ki-game-tour-cinematic-goku.webm"
+              data-video-title="Code Ki"
+              aria-label="Abrir demonstração da plataforma educacional Code Ki"
+            >
+              <video autoplay muted loop playsinline preload="metadata" aria-label="Code Ki, plataforma gamificada para aprendizagem em Dados">
+                <source src="code-ki-game-tour-cinematic-goku.webm" type="video/webm" />
+              </video>
+              <div class="preview-fallback">
+                <i data-lucide="external-link"></i>
+                <span>Abrir preview</span>
+              </div>
+            </button>
+            <div class="card-copy">
+              <span class="project-type">EdTech / Data Product</span>
+              <h3>Code Ki — Arena TEC</h3>
+              <p>
+                Plataforma gamificada para formação em Dados, com trilhas de Python e SQL,
+                20 mil desafios estruturados, progresso, dashboards e automação.
+              </p>
+              <a href="https://github.com/SamLoboTi/Code-ki-ARENA-TEC---GAMEPLAY-" target="_blank" rel="noreferrer">
+                Ver produto e dados <i data-lucide="arrow-up-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="preview-card preview-card-wide reveal">
+            <a
+              class="preview-frame image-preview"
+              href="https://github.com/SamLoboTi/PROJETO-ERP-WMS-TMS"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Abrir projeto LogiMAX"
+            >
+              <img src="https://raw.githubusercontent.com/SamLoboTi/PROJETO-ERP-WMS-TMS/main/assets/logimax-marketing-banner.png" alt="Dashboard analítico LogiMAX" loading="lazy" />
+              <div class="preview-fallback">
+                <i data-lucide="bar-chart-3"></i>
+                <span>Abrir case</span>
+              </div>
+            </a>
+            <div class="card-copy">
+              <span class="project-type">Analytics / BI Logístico</span>
+              <h3>LogiMAX — ERP, WMS e TMS</h3>
+              <p>
+                Integração de fontes logísticas, KPIs executivos, revisão de regras de negócio,
+                qualidade de dados, APIs e CI/CD para decisões confiáveis.
+              </p>
+              <a href="https://github.com/SamLoboTi/PROJETO-ERP-WMS-TMS" target="_blank" rel="noreferrer">
+                Ver case analítico <i data-lucide="arrow-up-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="preview-card reveal accent-preview">
+            <div class="generated-preview" aria-hidden="true">
+              <div class="factory-line"></div>
+              <div class="chart-stack">
+                <span style="--h: 35%"></span>
+                <span style="--h: 58%"></span>
+                <span style="--h: 76%"></span>
+                <span style="--h: 92%"></span>
+              </div>
+              <div class="status-node one"></div>
+              <div class="status-node two"></div>
+              <div class="status-node three"></div>
+            </div>
+            <div class="card-copy">
+              <span class="project-type">Engenharia de Dados / ETL</span>
+              <h3>Pipeline ETL CARDmoney</h3>
+              <p>Extração via API, tratamento com Python e Pandas, carga SQL e validação analítica no Databricks.</p>
+              <a href="https://github.com/SamLoboTi/Projeto-ETL" target="_blank" rel="noreferrer">
+                Ver pipeline <i data-lucide="arrow-up-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="preview-card reveal">
+            <button
+              class="preview-frame preview-trigger"
+              type="button"
+              data-video-src="think-dashboard-demo-seguro.webm"
+              data-video-title="Think"
+              aria-label="Abrir preview em video do projeto Think"
+            >
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="think-hero-poster.png"
+                aria-label="Capa em video do projeto Think"
+              >
+                <source src="think-dashboard-demo-seguro.webm" type="video/webm" />
+              </video>
+              <div class="preview-fallback">
+                <i data-lucide="external-link"></i>
+                <span>Abrir preview</span>
+              </div>
+            </button>
+            <div class="card-copy">
+              <span class="project-type">Automação / Monitoramento</span>
+              <h3>Think Business</h3>
+              <p>Monitoramento operacional para WhatsApp Business, com alertas, dashboard e automação de fluxos.</p>
+              <a href="think-dashboard-demo-seguro.webm" target="_blank" rel="noreferrer">
+                Abrir video demo <i data-lucide="monitor-play"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="preview-card reveal accent-preview">
+            <div class="generated-preview" aria-hidden="true">
+              <div class="factory-line"></div>
+              <div class="chart-stack">
+                <span style="--h: 72%"></span>
+                <span style="--h: 44%"></span>
+                <span style="--h: 88%"></span>
+                <span style="--h: 58%"></span>
+              </div>
+              <div class="status-node one"></div>
+              <div class="status-node two"></div>
+              <div class="status-node three"></div>
+            </div>
+            <div class="card-copy">
+              <span class="project-type">Dados Industriais / IA</span>
+              <h3>FactoryMind AI</h3>
+              <p>Monitoramento industrial com dados operacionais, dashboard, Python, APIs e recursos de análise preditiva.</p>
+              <a href="https://smart-factory-seven.vercel.app" target="_blank" rel="noreferrer">
+                Acessar deploy <i data-lucide="arrow-up-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="preview-card preview-card-wide reveal">
+            <a
+              class="preview-frame image-preview"
+              href="https://github.com/SamLoboTi/modular-com-Clean-Architecture-simplificada"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Abrir repositorio do projeto Plansvel"
+            >
+              <img src="plansvel-home.png" alt="Preview da Home Plansvel" loading="lazy" />
+              <div class="preview-fallback">
+                <i data-lucide="github"></i>
+                <span>Abrir README</span>
+              </div>
+            </a>
+            <div class="card-copy">
+              <span class="project-type">Produto Digital / Arquitetura</span>
+              <h3>Plansvel</h3>
+              <p>
+                Plataforma de turismo para busca, comparacao e reserva de hoteis, voos, pacotes e experiencias.
+              </p>
+              <a href="https://github.com/SamLoboTi/modular-com-Clean-Architecture-simplificada" target="_blank" rel="noreferrer">
+                Ver repositorio <i data-lucide="arrow-up-right"></i>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="github" class="section-block github-section">
+        <div class="section-heading reveal">
+          <span class="eyebrow">GitHub conectado</span>
+          <h2>Repositorios recentes de SamLoboTi</h2>
+          <p>Os cards abaixo tentam atualizar automaticamente pelo GitHub publico.</p>
+        </div>
+
+        <div class="repo-toolbar reveal">
+          <div class="profile-pill">
+            <img id="avatar" src="https://avatars.githubusercontent.com/u/217127424?v=4" alt="Avatar de SamLoboTi" />
+            <div>
+              <strong>SamLoboTi</strong>
+              <span id="github-meta">Carregando GitHub...</span>
+            </div>
+          </div>
+          <a class="icon-link" href="https://github.com/SamLoboTi" target="_blank" rel="noreferrer" aria-label="Abrir GitHub">
+            <i data-lucide="github"></i>
+          </a>
+        </div>
+
+        <div id="repo-grid" class="repo-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="curriculo" class="section-block resume-section">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Perfil profissional</span>
+          <h2>Currículo para recrutadores</h2>
+          <p>Versao em destaque no portfolio, com preview visual e dados sensiveis mascarados na pagina.</p>
+        </div>
+
+        <article class="resume-spotlight reveal" aria-label="Currículo de Samantha Lobo">
+          <div class="resume-ambient" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="resume-copy">
+            <span class="project-type">Currículo ATS 2026</span>
+            <h3>Samantha Lobo</h3>
+            <p>
+              Análise de Dados, BI e Engenharia de Dados aplicadas a pipelines,
+              dashboards, qualidade, indicadores e produtos orientados a dados.
+            </p>
+
+            <div class="resume-actions" aria-label="Acoes do curriculo">
+              <a
+                class="primary-action"
+                href="Curriculo_Samantha_Lobo_Dados_BI_2026.pdf"
+                download
+              >
+                <i data-lucide="download"></i>
+                Baixar curriculo
+              </a>
+              <a
+                class="secondary-action"
+                href="Curriculo_Samantha_Lobo_Dados_BI_2026.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i data-lucide="file-text"></i>
+                Abrir PDF
+              </a>
+            </div>
+
+            <div class="resume-metrics" aria-label="Areas de atuacao">
+              <span>Python</span>
+              <span>SQL</span>
+              <span>Power BI</span>
+              <span>ETL/ELT</span>
+              <span>Dashboards</span>
+              <span>Automacao</span>
+            </div>
+          </div>
+
+          <div class="resume-document-preview" aria-label="Preview do curriculo com dados sensiveis mascarados">
+            <div class="paper-top">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="paper-name">Samantha Lobo</div>
+            <div class="paper-role">Engenharia de Dados | BI | Automacao</div>
+            <div class="paper-sensitive">
+              <span><i data-lucide="mail"></i> s********@*****.com</span>
+              <span><i data-lucide="phone"></i> (**)&nbsp;*****-****</span>
+              <span><i data-lucide="map-pin"></i> Brasil</span>
+            </div>
+            <div class="paper-lines">
+              <span style="--w: 92%"></span>
+              <span style="--w: 78%"></span>
+              <span style="--w: 86%"></span>
+              <span style="--w: 66%"></span>
+            </div>
+            <div class="paper-grid">
+              <strong>Dados</strong>
+              <strong>Produtos</strong>
+              <strong>BI</strong>
+              <strong>APIs</strong>
+            </div>
+            <small>Preview protegido: somente contato e localizacao aparecem mascarados.</small>
+          </div>
+        </article>
+      </section>
+
+      <section id="contato" class="contact-section">
+        <div class="contact-copy reveal">
+          <span class="eyebrow">Contato profissional</span>
+          <h2>Vamos transformar dados em decisões e produtos</h2>
+          <p>
+            Fale sobre oportunidades em Dados, BI e Engenharia de Dados, projetos analíticos
+            ou colaborações. O formulário prepara uma mensagem profissional para envio.
+          </p>
+        </div>
+
+        <form class="contact-form reveal" id="contact-form">
+          <label>
+            Nome
+            <input name="name" type="text" autocomplete="name" placeholder="Seu nome" required />
+          </label>
+          <label>
+            E-mail
+            <input name="email" type="email" autocomplete="email" placeholder="voce@empresa.com" required />
+          </label>
+          <label>
+            Mensagem
+            <textarea name="message" rows="5" placeholder="Conte rapidamente o que voce precisa" required></textarea>
+          </label>
+          <button type="submit">
+            <i data-lucide="send"></i>
+            Preparar contato
+          </button>
+          <a class="github-contact" href="https://github.com/SamLoboTi" target="_blank" rel="noreferrer">
+            <i data-lucide="message-square"></i>
+            Contato via GitHub
+          </a>
+          <a
+            class="github-contact"
+            href="https://www.linkedin.com/in/samantha-lobo-ocireu/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i data-lucide="linkedin"></i>
+            Contato via LinkedIn
+          </a>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <span>SamLoboTi</span>
+      <div class="footer-links">
+        <a href="https://github.com/SamLoboTi" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/samantha-lobo-ocireu/" target="_blank" rel="noreferrer">
+          LinkedIn
+        </a>
+      </div>
+    </footer>
+
+    <div class="video-modal" id="video-modal" aria-hidden="true">
+      <div class="video-dialog" role="dialog" aria-modal="true" aria-labelledby="video-modal-title">
+        <div class="video-dialog-bar">
+          <strong id="video-modal-title">Preview</strong>
+          <button type="button" class="video-close" aria-label="Fechar preview">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+        <video id="video-modal-player" controls playsinline preload="metadata"></video>
+      </div>
+    </div>
+  </body>
+</html>
