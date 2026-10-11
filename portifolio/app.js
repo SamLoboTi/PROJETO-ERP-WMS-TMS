@@ -283,7 +283,9 @@ function renderRepos(repos) {
   const grid = document.querySelector("#repo-grid");
   if (!grid) return;
 
-  const visibleRepos = repos.filter((repo) => !repo.fork && repo.name !== GITHUB_USER).slice(0, 12);
+  const visibleRepos = repos
+    .filter((repo) => !repo.fork && repo.name !== GITHUB_USER && repo.size !== 0)
+    .slice(0, 12);
 
   grid.innerHTML = visibleRepos
     .map((repo, index) => {

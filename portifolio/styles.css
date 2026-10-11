@@ -2188,12 +2188,20 @@ footer {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  margin-top: auto;
   padding-top: 4px;
   color: #145daf;
   font-size: 0.83rem;
   font-weight: 800;
   transition: transform 180ms ease;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: auto;
+  padding-top: 4px;
 }
 
 .project-link svg {
