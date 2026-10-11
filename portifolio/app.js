@@ -1,30 +1,10 @@
 const GITHUB_USER = "SamLoboTi";
-const CONTACT_EMAIL = "";
-
-const featuredRepoOrder = [
-  "Dashboard-Power-BI-MiBusca-Crescimento-Clientes",
-  "Code-ki-ARENA-TEC---GAMEPLAY-",
-  "PROJETO-ERP-WMS-TMS",
-  "Projeto-ETL",
-  "Projeto-de-An-lise-de-Vendas-com-Python-SQL-",
-  "-FactoryMind-AI",
-  "AUTOMACAO-Think-BUSINESS-whatssap",
-];
+const CONTACT_EMAIL = "samanthaocireulobo93@icloud.com";
 
 const seedRepos = [
   {
-    name: "Dashboard-Power-BI-MiBusca-Crescimento-Clientes",
-    description: "Dashboard Power BI para crescimento de clientes, vendas, financeiro, LTV, contratos, fidelidade e medidas DAX.",
-    language: "Power BI",
-    html_url: "https://github.com/SamLoboTi/PROJETO-ERP-WMS-TMS/tree/codex/realtime-restructure-validation/portifolio/assets/mibusca-powerbi",
-    homepage: "assets/mibusca-powerbi/README.md",
-    stargazers_count: 0,
-    forks_count: 0,
-    updated_at: "2026-06-24T23:20:21Z",
-  },
-  {
     name: "Projeto-ETL",
-    description: "Pipeline ETL em Python com extração via API, tratamento, carga SQL e validação no Databricks.",
+    description: "Pipeline ETL em Python para API, tratamento em CSV, carga SQL e evidencias no Databricks.",
     language: "Python",
     html_url: "https://github.com/SamLoboTi/Projeto-ETL",
     homepage: "",
@@ -34,7 +14,7 @@ const seedRepos = [
   },
   {
     name: "Code-ki-ARENA-TEC---GAMEPLAY-",
-    description: "EdTech para formação em Dados com Python, SQL, 20 mil desafios, progresso, dashboards e automação.",
+    description: "Plataforma gamificada de programacao com arena 3D, trilhas, backend seguro e dados educacionais.",
     language: "JavaScript",
     html_url: "https://github.com/SamLoboTi/Code-ki-ARENA-TEC---GAMEPLAY-",
     homepage: "",
@@ -44,7 +24,7 @@ const seedRepos = [
   },
   {
     name: "AUTOMACAO-Think-BUSINESS-whatssap",
-    description: "Monitoramento para WhatsApp Business com alertas, dashboard, dados operacionais e automação.",
+    description: "Monitoramento inteligente para WhatsApp Business com alertas, dashboard e operacao empresarial.",
     language: "TypeScript",
     html_url: "https://github.com/SamLoboTi/AUTOMACAO-Think-BUSINESS-whatssap",
     homepage: "",
@@ -54,7 +34,7 @@ const seedRepos = [
   },
   {
     name: "PROJETO-ERP-WMS-TMS",
-    description: "Produto analítico de logística com ERP, WMS, TMS, KPIs, APIs, qualidade e revisão de métricas.",
+    description: "Dashboard analitico de logistica com ERP, WMS, TMS, KPIs, APIs JSON e revisao de metricas.",
     language: "Python",
     html_url: "https://github.com/SamLoboTi/PROJETO-ERP-WMS-TMS",
     homepage: "",
@@ -64,7 +44,7 @@ const seedRepos = [
   },
   {
     name: "-FactoryMind-AI",
-    description: "Produto de dados industriais com Python, APIs, IA preditiva e dashboard para monitoramento operacional.",
+    description: "Monitoramento industrial inteligente com Python, NestJS, React, IA preditiva e dashboard operacional.",
     language: "Python",
     html_url: "https://github.com/SamLoboTi/-FactoryMind-AI",
     homepage: "",
@@ -135,10 +115,6 @@ const seedRepos = [
 ];
 
 const readmeCovers = {
-  "Dashboard-Power-BI-MiBusca-Crescimento-Clientes": {
-    src: "assets/mibusca-powerbi/dashboard-financeiro.png",
-    alt: "Dashboard Power BI MiBusca - financeiro, vendas e crescimento",
-  },
   "Projeto-ETL": {
     src: "https://raw.githubusercontent.com/SamLoboTi/Projeto-ETL/main/964b5c18-9f7d-4ce1-afae-0161c3a21144.jfif",
     alt: "Tabela produtos refinados no Databricks",
@@ -160,18 +136,42 @@ const readmeCovers = {
     alt: "Visao geral do sistema Smart Factory",
   },
   "modular-com-Clean-Architecture-simplificada": {
-    src: "https://raw.githubusercontent.com/SamLoboTi/modular-com-Clean-Architecture-simplificada/main/docs/assets/plansvel-home.png",
+    src: "plansvel-home.png",
     alt: "Preview da Home Plansvel",
+  },
+  "teste_spark_Samantha_Lobo.ipynb": {
+    src: "assets/project-covers/spark-notebook.svg",
+    alt: "Notebook PySpark transformando arquivos de origem em uma tabela analítica validada",
+  },
+  "Marketing-Analytics-com-PySpark": {
+    src: "marketing-pyspark-workspace.png",
+    alt: "Workspace real do projeto Marketing Analytics com PySpark",
+  },
+  "Power-bi-": {
+    src: "assets/project-covers/power-bi-dashboards.svg",
+    alt: "Dashboard de Business Intelligence com indicadores, série temporal e filtros",
+  },
+  "PROJETO_SIS_engenier": {
+    src: "assets/project-covers/systems-engineering.svg",
+    alt: "Diagrama de engenharia de sistemas com APIs e serviços conectados",
+  },
+  "Previs-o-de-Riscos-de-Acidentes-de-transito-Kaggle": {
+    src: "assets/project-covers/traffic-risk-kaggle.svg",
+    alt: "Mapa de vias com áreas de risco e previsões de acidentes de trânsito",
+  },
+  "ANALISE_vendas-2": {
+    src: "assets/project-covers/sales-analytics.svg",
+    alt: "Relatório de análise de vendas com pedidos, receita e desempenho mensal",
   },
 };
 
 const palettes = [
-  ["#4ed6a8", "#1c4f63"],
-  ["#f2bf5b", "#593b7a"],
-  ["#ff7664", "#263d66"],
-  ["#68d8f7", "#4a3b21"],
-  ["#d7f171", "#243f36"],
-  ["#ff9a8a", "#224c52"],
+  ["#dbeafe", "#94b7e8"],
+  ["#d9f2ee", "#86c8bd"],
+  ["#e6e7fa", "#a9a9d8"],
+  ["#e4edf5", "#93b1c9"],
+  ["#f7eddb", "#dac18f"],
+  ["#e1efe4", "#9ac5a6"],
 ];
 
 function icon(name) {
@@ -180,11 +180,82 @@ function icon(name) {
 
 function cleanDescription(repo) {
   const fallback = "Projeto publico no GitHub com codigo, historico e evolucao tecnica.";
-  return (repo.description || fallback).replace(/\*\*/g, "");
+  return escapeHtml((repo.description || fallback).replace(/\*\*/g, ""));
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (character) => {
+    const entities = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+    return entities[character];
+  });
 }
 
 function getRepoCover(repo) {
   return readmeCovers[repo.name] || null;
+}
+
+function getArtworkProfile(repo) {
+  const identity = `${repo.name} ${repo.description || ""} ${repo.language || ""}`.toLowerCase();
+
+  if (/factory|industry|industrial|manufactur/.test(identity)) {
+    return { label: "INDUSTRIAL ANALYTICS", title: "Operação em foco", icon: "activity" };
+  }
+  if (/think|whatsapp|automat|monitor|alert|message/.test(identity)) {
+    return { label: "AUTOMAÇÃO E MONITORAMENTO", title: "Sinais em ação", icon: "workflow" };
+  }
+  if (/code.?ki|game|learning|educ|arena/.test(identity)) {
+    return { label: "TECNOLOGIA E APRENDIZAGEM", title: "Progresso por dados", icon: "graduation-cap" };
+  }
+  if (/touris|hotel|travel|modular|full.?stack|plansvel/.test(identity)) {
+    return { label: "PRODUTO DIGITAL", title: "Experiência conectada", icon: "layers-2" };
+  }
+  if (/notebook|colab|kaggle|risk|previs|predict/.test(identity)) {
+    return { label: "ANÁLISE E EXPLORAÇÃO", title: "Da hipótese ao insight", icon: "flask-conical" };
+  }
+  if (/etl|pipeline|databrick|spark|engineer/.test(identity)) {
+    return { label: "ENGENHARIA DE DADOS", title: "Dados em movimento", icon: "database" };
+  }
+  if (/power.?bi|dashboard|sales|venda|analyt|sql|data/.test(identity)) {
+    return { label: "DADOS E BUSINESS INTELLIGENCE", title: "Métricas para decidir", icon: "chart-no-axes-combined" };
+  }
+
+  return { label: "ENGENHARIA E TECNOLOGIA", title: "Solução em construção", icon: "blocks" };
+}
+
+function repositoryArtwork(repo, index) {
+  const artwork = getArtworkProfile(repo);
+  const color = palettes[index % palettes.length];
+  const bars = Array.from({ length: 7 }, (_, position) => {
+    const height = 18 + ((repo.name.length * (position + 5) + index * 13) % 49);
+    const x = 248 + position * 19;
+    return `<rect x="${x}" y="${154 - height}" width="10" height="${height}" rx="3" fill="${color[1]}" opacity="${0.42 + (position % 3) * 0.18}"/>`;
+  }).join("");
+
+  return `
+    <div class="repo-art" aria-hidden="true">
+      <svg viewBox="0 0 430 190" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="repo-gradient-${index}" x1="0" y1="0" x2="1" y2="1">
+            <stop stop-color="${color[0]}"/>
+            <stop offset="1" stop-color="${color[1]}"/>
+          </linearGradient>
+        </defs>
+        <rect width="430" height="190" rx="12" fill="url(#repo-gradient-${index})"/>
+        <path d="M0 150 430 32M-30 190 395 0M0 95h430M0 135h430" stroke="#fff" stroke-opacity=".25"/>
+        <rect x="26" y="26" width="180" height="136" rx="9" fill="#fff" fill-opacity=".8"/>
+        <rect x="40" y="40" width="152" height="10" rx="5" fill="#274766" fill-opacity=".16"/>
+        <rect x="40" y="61" width="82" height="7" rx="3.5" fill="#274766" fill-opacity=".12"/>
+        <circle cx="64" cy="105" r="23" fill="none" stroke="#168a85" stroke-width="8" stroke-dasharray="104 42" transform="rotate(-90 64 105)"/>
+        <path d="M107 128V98h11v30zm20 0V79h11v49zm20 0V91h11v37zm20 0V68h11v60z" fill="#2879bc" fill-opacity=".76"/>
+        <rect x="230" y="38" width="174" height="116" rx="10" fill="#fff" fill-opacity=".84"/>
+        <rect x="248" y="53" width="76" height="8" rx="4" fill="#274766" fill-opacity=".2"/>
+        ${bars}
+        <circle cx="375" cy="60" r="8" fill="#118c7c"/>
+        <rect x="248" y="163" width="156" height="4" rx="2" fill="#fff" fill-opacity=".5"/>
+      </svg>
+      <span class="repo-art-caption"><i data-lucide="${artwork.icon}"></i><span><small>${artwork.label}</small><strong>${artwork.title}</strong></span></span>
+    </div>
+  `;
 }
 
 function formatDate(dateValue) {
@@ -198,7 +269,6 @@ function formatDate(dateValue) {
 
 function isStableHomepage(url) {
   if (!url) return false;
-  if (url.startsWith("assets/")) return true;
   const blockedHosts = ["ngrok-free.dev", "trycloudflare.com"];
 
   try {
@@ -211,18 +281,9 @@ function isStableHomepage(url) {
 
 function renderRepos(repos) {
   const grid = document.querySelector("#repo-grid");
-  const visibleRepos = repos
-    .filter((repo) => !repo.fork && repo.name !== GITHUB_USER)
-    .sort((first, second) => {
-      const firstPosition = featuredRepoOrder.indexOf(first.name);
-      const secondPosition = featuredRepoOrder.indexOf(second.name);
-      const firstRank = firstPosition === -1 ? featuredRepoOrder.length : firstPosition;
-      const secondRank = secondPosition === -1 ? featuredRepoOrder.length : secondPosition;
+  if (!grid) return;
 
-      if (firstRank !== secondRank) return firstRank - secondRank;
-      return new Date(second.updated_at || 0) - new Date(first.updated_at || 0);
-    })
-    .slice(0, 12);
+  const visibleRepos = repos.filter((repo) => !repo.fork && repo.name !== GITHUB_USER).slice(0, 12);
 
   grid.innerHTML = visibleRepos
     .map((repo, index) => {
@@ -233,15 +294,16 @@ function renderRepos(repos) {
       return `
         <article class="repo-card reveal is-visible" style="--card-a: ${a}; --card-b: ${b}">
           <div class="repo-visual ${cover ? "has-cover" : ""}">
+            ${repositoryArtwork(repo, index)}
             ${
               cover
-                ? `<img src="${cover.src}" alt="${cover.alt}" loading="lazy" onerror="this.closest('.repo-visual').classList.remove('has-cover'); this.remove();" />`
+                ? `<img src="${cover.src}" alt="${cover.alt}" loading="lazy" />`
                 : ""
             }
             <span>${language}</span>
           </div>
           <div class="repo-body">
-            <h3>${repo.name}</h3>
+            <h3>${escapeHtml(repo.name)}</h3>
             <p>${cleanDescription(repo)}</p>
             <div class="repo-meta">
               <span>${icon("star")} ${repo.stargazers_count || 0}</span>
@@ -249,7 +311,7 @@ function renderRepos(repos) {
               <span>${icon("clock-3")} ${formatDate(repo.updated_at)}</span>
             </div>
             <div class="repo-actions">
-              <a href="${repo.html_url}" target="_blank" rel="noreferrer">${icon("github")} Codigo</a>
+              <a href="${repo.html_url}" target="_blank" rel="noreferrer">${icon("external-link")} Codigo</a>
               ${
                 homepage
                   ? `<a href="${homepage}" target="_blank" rel="noreferrer">${icon("monitor-play")} Preview</a>`
@@ -262,11 +324,24 @@ function renderRepos(repos) {
     })
     .join("");
 
+  grid.querySelectorAll(".repo-visual img").forEach((image) => {
+    image.addEventListener(
+      "error",
+      () => {
+        image.closest(".repo-visual").classList.remove("has-cover");
+        image.remove();
+      },
+      { once: true },
+    );
+  });
+
   document.querySelector("#repo-count").textContent = visibleRepos.length || 9;
   if (window.lucide) window.lucide.createIcons();
 }
 
 async function loadGithub() {
+  if (!document.querySelector("#repo-grid")) return;
+
   renderRepos(seedRepos);
 
   try {
@@ -279,16 +354,11 @@ async function loadGithub() {
 
     const profile = await profileResponse.json();
     const repos = await reposResponse.json();
-    const repoNames = new Set(repos.map((repo) => repo.name));
-    const mergedRepos = [
-      ...seedRepos.filter((repo) => !repoNames.has(repo.name)),
-      ...repos,
-    ];
 
     document.querySelector("#avatar").src = profile.avatar_url;
     document.querySelector("#github-meta").textContent =
       `${profile.public_repos} repos publicos | perfil criado em ${formatDate(profile.created_at)}`;
-    renderRepos(mergedRepos);
+    renderRepos(repos);
   } catch (error) {
     document.querySelector("#github-meta").textContent = "Mostrando repositorios salvos localmente";
   }
@@ -311,7 +381,10 @@ function setupReveal() {
 }
 
 function setupContact() {
-  document.querySelector("#contact-form").addEventListener("submit", (event) => {
+  const form = document.querySelector("#contact-form");
+  if (!form) return;
+
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const name = data.get("name");
@@ -326,6 +399,8 @@ function setupContact() {
 
 function setupVideoPreviews() {
   const modal = document.querySelector("#video-modal");
+  if (!modal) return;
+
   const player = document.querySelector("#video-modal-player");
   const title = document.querySelector("#video-modal-title");
   const closeButton = modal.querySelector(".video-close");
@@ -363,9 +438,14 @@ function setupVideoPreviews() {
 
 function setupCanvas() {
   const canvas = document.querySelector("#motion-field");
+  if (!canvas) return;
+
   const context = canvas.getContext("2d");
-  const pointer = { x: 0.5, y: 0.5 };
+  if (!context) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let particles = [];
+  let animationFrame = 0;
 
   function resize() {
     const ratio = Math.min(window.devicePixelRatio || 1, 2);
@@ -373,60 +453,69 @@ function setupCanvas() {
     canvas.height = Math.floor(window.innerHeight * ratio);
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
 
-    const amount = Math.min(90, Math.max(34, Math.floor(window.innerWidth / 18)));
+    const amount = Math.min(52, Math.max(30, Math.floor(window.innerWidth / 26)));
     particles = Array.from({ length: amount }, (_, index) => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      speed: 0.25 + Math.random() * 0.7,
-      size: 1 + Math.random() * 2.4,
-      hue: index % 3,
+      speed: 0.22 + Math.random() * 0.28,
+      size: 1.6 + Math.random() * 1.1,
+      hue: index % 4,
     }));
+    draw(!reducedMotion);
   }
 
-  function draw() {
+  function draw(animate = true) {
     context.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
     particles.forEach((particle, index) => {
-      particle.y -= particle.speed;
-      particle.x += Math.sin(Date.now() * 0.0008 + index) * 0.25 + (pointer.x - 0.5) * 0.3;
+      if (animate) {
+        particle.y -= particle.speed;
+        particle.x += Math.sin(Date.now() * 0.00025 + index) * 0.08;
+      }
 
       if (particle.y < -20) {
         particle.y = window.innerHeight + 20;
         particle.x = Math.random() * window.innerWidth;
       }
 
-      const colors = ["rgba(78, 214, 168, 0.7)", "rgba(242, 191, 91, 0.56)", "rgba(104, 216, 247, 0.52)"];
+      const colors = ["#245fd2", "#078f8a", "#178f55", "#ad7416"];
       context.beginPath();
       context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
       context.fillStyle = colors[particle.hue];
+      context.globalAlpha = 0.72;
+      context.shadowBlur = 10;
+      context.shadowColor = colors[particle.hue];
       context.fill();
+      context.shadowBlur = 0;
+      context.globalAlpha = 1;
 
       for (let i = index + 1; i < particles.length; i += 1) {
         const other = particles[i];
         const distance = Math.hypot(particle.x - other.x, particle.y - other.y);
-        if (distance < 105) {
-          context.globalAlpha = (105 - distance) / 420;
+        if (distance < 178) {
+          context.globalAlpha = ((178 - distance) / 178) * 0.48;
+          context.lineWidth = 0.8;
           context.beginPath();
           context.moveTo(particle.x, particle.y);
           context.lineTo(other.x, other.y);
-          context.strokeStyle = "#ffffff";
+          context.strokeStyle = colors[particle.hue];
           context.stroke();
           context.globalAlpha = 1;
         }
       }
     });
 
-    requestAnimationFrame(draw);
+    if (animate && !document.hidden) animationFrame = requestAnimationFrame(draw);
   }
 
-  window.addEventListener("resize", resize);
-  window.addEventListener("pointermove", (event) => {
-    pointer.x = event.clientX / window.innerWidth;
-    pointer.y = event.clientY / window.innerHeight;
+  window.addEventListener("resize", resize, { passive: true });
+  document.addEventListener("visibilitychange", () => {
+    cancelAnimationFrame(animationFrame);
+    if (document.hidden) return;
+    draw(!reducedMotion);
   });
 
   resize();
-  draw();
 }
 
 document.addEventListener("DOMContentLoaded", () => {

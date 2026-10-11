@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="380" viewBox="0 0 430 190" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="15" x2="424" y2="174" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F4EF"/>
+      <stop offset="1" stop-color="#E3ECEE"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" y1="75" x2="300" y2="119" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#536B78"/>
+      <stop offset="1" stop-color="#344D5C"/>
+    </linearGradient>
+  </defs>
+  <rect width="430" height="190" rx="12" fill="url(#bg)"/>
+  <path d="M0 42h430M0 148h430M77 0v190M276 0v190M391 0v190" stroke="#CAD9D8" stroke-width="7"/>
+  <path d="M0 43h430M0 149h430M78 0v190M277 0v190M392 0v190" stroke="#fff" stroke-width="2" stroke-dasharray="8 8"/>
+  <path d="m0 96 430-23M0 116l430-23" stroke="#B9C9C7" stroke-width="5"/>
+  <path d="m0 96 430-23M0 116l430-23" stroke="#fff" stroke-width="1.5" stroke-dasharray="8 8"/>
+  <path d="M-10 126 166 24l84 43 204-37v47L264 103l-88-46-186 108z" fill="url(#road)" opacity=".96"/>
+  <path d="m0 126 166-96 81 42 183-34" stroke="#F1CE78" stroke-width="2" stroke-dasharray="10 8"/>
+  <circle cx="126" cy="86" r="29" fill="#F47A62" fill-opacity=".17"/>
+  <circle cx="126" cy="86" r="18" fill="#F47A62" fill-opacity=".23"/>
+  <circle cx="126" cy="86" r="8" fill="#D84F4B"/>
+  <circle cx="231" cy="111" r="23" fill="#EAAF53" fill-opacity=".17"/>
+  <circle cx="231" cy="111" r="13" fill="#EAAF53" fill-opacity=".29"/>
+  <circle cx="231" cy="111" r="5" fill="#D99228"/>
+  <circle cx="318" cy="47" r="23" fill="#39A98E" fill-opacity=".14"/>
+  <circle cx="318" cy="47" r="12" fill="#39A98E" fill-opacity=".26"/>
+  <circle cx="318" cy="47" r="5" fill="#24836E"/>
+  <rect x="27" y="27" width="135" height="34" rx="7" fill="#fff" fill-opacity=".94" stroke="#D8E3E3"/>
+  <circle cx="40" cy="40" r="4" fill="#E45C54"/>
+  <text x="50" y="43" fill="#344C5B" font-family="Arial,sans-serif" font-size="8" font-weight="700">ACCIDENT RISK</text>
+  <text x="39" y="54" fill="#778A91" font-family="Arial,sans-serif" font-size="7">GEOSPATIAL MODEL / KAGGLE</text>
+  <rect x="292" y="133" width="114" height="39" rx="8" fill="#fff" stroke="#D9E4E5"/>
+  <text x="303" y="146" fill="#506873" font-family="Arial,sans-serif" font-size="7">PREDICTED RISK</text>
+  <circle cx="306" cy="160" r="4" fill="#D84F4B"/>
+  <text x="314" y="163" fill="#455D69" font-family="Arial,sans-serif" font-size="7">HIGH</text>
+  <circle cx="350" cy="160" r="4" fill="#D99228"/>
+  <text x="358" y="163" fill="#455D69" font-family="Arial,sans-serif" font-size="7">MEDIUM</text>
+  <path d="M186 77h13m-6-5 6 5-6 5" stroke="#DDE9E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="182" y="66" width="18" height="11" rx="3" fill="#F8FBFC"/>
+  <circle cx="186" cy="78" r="2" fill="#294756"/>
+  <circle cx="196" cy="78" r="2" fill="#294756"/>
+</svg>
