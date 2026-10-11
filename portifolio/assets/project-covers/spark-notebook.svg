@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="380" viewBox="0 0 430 190" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="18" y1="12" x2="403" y2="184" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111D38"/>
+      <stop offset="1" stop-color="#202957"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="115" y1="106" x2="342" y2="106" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#49D4E7"/>
+      <stop offset="1" stop-color="#A789FA"/>
+    </linearGradient>
+  </defs>
+  <rect width="430" height="190" rx="12" fill="url(#bg)"/>
+  <path d="M0 152h430M0 166h430" stroke="#A8B8EA" stroke-opacity=".09"/>
+  <circle cx="383" cy="31" r="43" fill="#7561D9" fill-opacity=".15"/>
+  <circle cx="359" cy="47" r="2" fill="#F5C76A"/>
+  <circle cx="395" cy="67" r="2" fill="#51D5D8"/>
+  <rect x="20" y="23" width="145" height="128" rx="8" fill="#0A1328" stroke="#7185C0" stroke-opacity=".42"/>
+  <path d="M20 46h145" stroke="#7185C0" stroke-opacity=".42"/>
+  <circle cx="34" cy="35" r="3" fill="#EF8A78"/>
+  <circle cx="45" cy="35" r="3" fill="#E8C56D"/>
+  <circle cx="56" cy="35" r="3" fill="#64CDAA"/>
+  <text x="32" y="67" fill="#78D8EA" font-family="monospace" font-size="9">spark.read</text>
+  <text x="32" y="83" fill="#D4DDF5" font-family="monospace" font-size="8">.format("parquet")</text>
+  <text x="32" y="101" fill="#B19AFF" font-family="monospace" font-size="9">transform(df)</text>
+  <text x="32" y="119" fill="#F1C976" font-family="monospace" font-size="8">validate(schema)</text>
+  <text x="32" y="138" fill="#77D8B9" font-family="monospace" font-size="8">write.delta()</text>
+  <path d="M174 88h50m-8-7 8 7-8 7" stroke="url(#beam)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="234" y="57" width="77" height="63" rx="8" fill="#263766" stroke="#7788C2" stroke-opacity=".62"/>
+  <path d="M248 75h47M248 87h36M248 99h42" stroke="#8DCDE6" stroke-width="3" stroke-linecap="round" stroke-opacity=".78"/>
+  <circle cx="297" cy="107" r="3" fill="#EEC76D"/>
+  <text x="241" y="135" fill="#CBD7F3" font-family="Arial,sans-serif" font-size="8" letter-spacing=".6">TRANSFORM</text>
+  <path d="M319 88h25m-7-7 7 7-7 7" stroke="#AE93FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="373" cy="70" rx="27" ry="9" fill="#42C8C7"/>
+  <path d="M346 70v39c0 5 12 9 27 9s27-4 27-9V70" fill="#176E83" stroke="#6DE0D1" stroke-opacity=".74"/>
+  <path d="M346 82c0 5 12 9 27 9s27-4 27-9M346 96c0 5 12 9 27 9s27-4 27-9" stroke="#6DE0D1" stroke-opacity=".68"/>
+  <ellipse cx="373" cy="70" rx="27" ry="9" stroke="#8BF0D4" stroke-opacity=".82"/>
+  <text x="345" y="137" fill="#BFEDE8" font-family="Arial,sans-serif" font-size="8" letter-spacing=".6">DELTA TABLE</text>
+  <rect x="20" y="163" width="68" height="15" rx="7.5" fill="#283868"/>
+  <circle cx="31" cy="170.5" r="3" fill="#59DCC9"/>
+  <text x="39" y="173" fill="#D6E3F8" font-family="Arial,sans-serif" font-size="7" letter-spacing=".5">PYSPARK LAB</text>
+</svg>
